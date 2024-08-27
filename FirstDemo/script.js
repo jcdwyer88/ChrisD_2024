@@ -16,14 +16,19 @@ let lastName = 'Dwyer'
 let fullName = `${firstName} ${lastName}`
 
 // 6. Create an array named `colors` with the values 'red', 'green', and 'blue'
+let colors = ['red', 'green', 'blue']
 
 // 7. Access the first element of the `colors` array and assign it to a variable `firstColor`
+let firstColor = colors[0]
 
 // 8. Change the second element of the `colors` array to 'yellow'
+colors[1] = 'yellow'
 
 // 9. Add 'purple' to the end of the `colors` array
+colors.push('purple')
 
 // 10. Find the length of the `colors` array and assign it to a variable `colorsLength`
+let colorsLength = colors.length
 
 // 11. Create an object named `person` with properties `name` (string), `age` (number), and `isStudent` (boolean)
 
