@@ -108,13 +108,13 @@ let favoriteMovies = {title: 'Pulp Fiction', year: 1994}
 // 30. Create a variable `grade`, write a conditional statement that classifies the grade as "A" for 90-100, "B" for 80-89, "C" for 70-79, "D" for 60-69, and "F" for below 60
 let grade = 57
 function classifyGrade(g){
-    let grade
-    if (g < 0 || grade > 100) grade = "Invalid Grade"
-    else if (g >= 90) grade = "A"
-    else if (g >= 80) grade = "B"
-    else if (g >= 70) grade = "C"
-    else if (g >= 60) grade = "D"
-    else grade = "F"
-    return grade
+    let gradeLetter
+    if (g < 0 || grade > 100) gradeLetter = "Invalid Grade"
+    else if (g >= 90) gradeLetter = "A"
+    else if (g >= 80) gradeLetter = "B"
+    else if (g >= 70) gradeLetter = "C"
+    else if (g >= 60) gradeLetter = "D"
+    else gradeLetter = "F"
+    return gradeLetter
 }
 console.log(classifyGrade(grade))
