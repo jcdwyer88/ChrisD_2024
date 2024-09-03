@@ -63,5 +63,16 @@ nameOfFunction();
 // let area = (length = 5, width = 5) => ((length *= 2) * width);
 // console.log(area(5,6));
 
-let greeting = (arg) => `Hello, ${arg}`;
-console.log(greeting("Chris"));
+// let greeting = (arg) => `Hello, ${arg}`;
+// console.log(greeting("Chris"));
+
+let animals = ["Hephalump", "Woosle", "Bat"];
+let multiples = (animal) => {
+  let newAnimal = [];
+  animals.forEach(el => newAnimal.push(el + "'s"))
+    return newAnimal;
+  }
+  console.log("Original: " + animals);
+  let manyAnimals = multiples(animals);
+  console.log("New: " + manyAnimals);
+  console.log(manyAnimals[manyAnimals.length-1]);
