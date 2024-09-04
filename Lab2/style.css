@@ -56,3 +56,38 @@ tbody td {
 tfoot th {
   text-align: right;
 }
+a.button{
+    background-color: #464646;
+    border: 1px solid white;
+    color: white;
+    padding: 4px 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    border-radius: 8%;
+    cursor: pointer;
+  }
+  a.button:hover { 
+    background-color: rgb(113, 246, 231); 
+    color: rgb(82, 82, 74); 
+    box-shadow: rgba(32, 31, 31, 0.35) 0px 7px 10px; 
+    font-weight: 900; 
+}
+input[type=submit]{
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  input[type=reset] {
+    background-color: #aa1704aa;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
