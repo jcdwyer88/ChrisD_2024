@@ -3,130 +3,118 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/chicken.ico" />
     <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet" type="text/css" />
     <link href="style.css" rel="stylesheet" />
-    <title>Document</title>
+    <title>WTC? Application</title>
   </head>
   <body>
-    <div>
+    <div class="navigation">
         <a href="index.html" class="button">Home</a>     
         <a href="menu.html" class="button">Menu</a>
         <a href=now_hiring.html class="button">Now Hiring</a>
     </div>
     <h1><center>Now Hiring! Apply Now!</center></h1>
     <div>
-      <form>
-        <label for="fname">First name: </label>
-        <input type="text" id="fname" name="fname" maxlength="20" size="20" required/>
-        <br>
-        <label for="lname">Last name: </label>
-        <input type="text"
-          id="lname"
-          name="lname"
-          maxlength="20"
-          size="20"
-        /><br />
-        <label for="address1">Address 1: </label>
-        <input type="text" id="address1" name="address1" required /><br />
-        <label for="address2">Address 2: </label>
-        <input type="text" id="address2" name="address2" /><br />
-        <label for="city">City: </label>
-        <input type="text" id="city" name="city"
-          maxlength="30" size="20" required/>
+      <form action="" method="post">
+        <label for="fname">First name: 
+            <input type="text" id="fname" name="fname" maxlength="20" required><br></label>
+        <label>Last name: 
+            <input type="text" id="lname" name="lname" maxlength="20"></label><br>
+        <label>Address 1: 
+            <input type="text" id="address1" name="address1" required></label><br>
+        <label>Address 2:
+            <input type="text" id="address2" name="address2"></label><br>
+        <label>City: 
+            <input type="text" id="city" name="city"
+            maxlength="30" size="20" required/></label>
         <select name="state" id="state" required>
-          <option value="" selected="selected">Select a State</option>
-          <option value="AL">AL</option>
-          <option value="AK">AK</option>
-          <option value="AZ">AZ</option>
-          <option value="AR">AR</option>
-          <option value="CA">CA</option>
-          <option value="CO">CO</option>
-          <option value="CT">CT</option>
-          <option value="DE">DE</option>
-          <option value="DC">DC</option>
-          <option value="FL">FL</option>
-          <option value="GA">GA</option>
-          <option value="HI">HI</option>
-          <option value="ID">ID</option>
-          <option value="IL">IL</option>
-          <option value="IN">IN</option>
-          <option value="IA">IA</option>
-          <option value="KS">KS</option>
-          <option value="KY">KY</option>
-          <option value="LA">LA</option>
-          <option value="ME">ME</option>
-          <option value="MD">MD</option>
-          <option value="MA">MA</option>
-          <option value="MI">MI</option>
-          <option value="MN">MN</option>
-          <option value="MS">MS</option>
-          <option value="MO">MO</option>
-          <option value="MT">MT</option>
-          <option value="NE">NE</option>
-          <option value="NV">NV</option>
-          <option value="NH">NH</option>
-          <option value="NJ">NJ</option>
-          <option value="NM">NM</option>
-          <option value="NY">NY</option>
-          <option value="NC">NC</option>
-          <option value="ND">ND</option>
-          <option value="OH">OH</option>
-          <option value="OK">OK</option>
-          <option value="OR">OR</option>
-          <option value="PA">PA</option>
-          <option value="RI">RI</option>
-          <option value="SC">SC</option>
-          <option value="SD">SD</option>
-          <option value="TN">TN</option>
-          <option value="TX">TX</option>
-          <option value="UT">UT</option>
-          <option value="VT">VT</option>
-          <option value="VA">VA</option>
-          <option value="WA">WA</option>
-          <option value="WV">WV</option>
-          <option value="WI">WI</option>
-          <option value="WY">WY</option>
-          </select><br />
-        <label for="age">Age: </label>
-        <input type="number" id="age" name="age" min="21" max="99" /><br />
-        <label for="phone">Phone: </label>
-        <input type="tel" id="phone" name="phone" placeholder="Format: 111-222-3333" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}""><br />
-        <label for="email">Email: </label>
-        <input type="email" id="email" name="email" /><br />
-        <label for="pwd">Password: </label>
-        <input type="password" id="pwd" name="pwd"
-          pattern="(?=.*\d)(?=.*[\W_]).{7,12}"
-          title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-          required/><br/>
-        <div>
-            <label for="marital_status">Marital Status: </label>
-            <input type="radio" id="married" name="marital_status" value="married" />
-            <label for="html">Married</label>
-            <input type="radio" id="single" name="marital_status" value="single" checked="checked"/>
-            <label for="html">Single</label>
-            <input type="radio" id="complicated" name="marital_status" value="complicated" />
-            <label for="html">Complicated</label><br />
-        </div>
-        <div>
-            <label for="favorite_colors">Favorite Color(s): </label>
-            <input type="checkbox" id="blue" name="favorite_colors" value="blue">
-            <label for="favorite_colors"> Blue</label>
-            <input type="checkbox" id="red" name="favorite_colors" value="red">
-            <label for="favorite_colors"> Red</label>
-            <input type="checkbox" id="orange" name="favorite_colors" value="orange">
-            <label for="favorite_colors"> Orange</label>
-            <input type="checkbox" id="pink" name="favorite_colors" value="pink">
-            <label for="favorite_colors"> Pink</label>
-            <input type="checkbox" id="Black" name="favorite_colors" value="black">
-            <label for="favorite_colors"> Black</label><br><br>
-        </div>
-        <label for="other_info">Enter other information about yourself (300 char max): </label><br>
-        <textarea name="other_info" rows="4" cols="75""></textarea>
-        <div>
-          <input type="submit" value="Submit" />
-          <input type="reset" value="Reset" />
-        </div>
+            <option value="">Select a State</option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AZ">AZ</option>
+            <option value="AR">AR</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DE">DE</option>
+            <option value="DC">DC</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="IA">IA</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="ME">ME</option>
+            <option value="MD">MD</option>
+            <option value="MA">MA</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MS">MS</option>
+            <option value="MO">MO</option>
+            <option value="MT">MT</option>
+            <option value="NE">NE</option>
+            <option value="NV">NV</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NY">NY</option>
+            <option value="NC">NC</option>
+            <option value="ND">ND</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="PA">PA</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VT">VT</option>
+            <option value="VA">VA</option>
+            <option value="WA">WA</option>
+            <option value="WV">WV</option>
+            <option value="WI">WI</option>
+            <option value="WY">WY</option></select><br>
+        <label>Age: 
+            <input type="number" id="age" name="age" min="21" max="99" /></label><br>
+        <label>Phone: 
+            <input type="tel" id="phone" name="phone" 
+            placeholder="Format: 111-222-3333" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}""></label><br>
+        <label>Email: 
+            <input type="email" id="email" name="email"></label><br>
+        <label>Password: 
+            <input type="password" id="pwd" name="pwd"
+            pattern="(?=.*\d)(?=.*[\W_]).{7,12}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            required></label><br>
+        <label for="marital_status">Marital Status: </label>
+        <input type="radio" id="married" name="marital_status" value="married" />
+        <label for="html">Married</label>
+        <input type="radio" id="single" name="marital_status" value="single" checked="checked"/>
+        <label for="html">Single</label>
+        <input type="radio" id="complicated" name="marital_status" value="complicated" />
+        <label for="html">Complicated</label><br>
+        <label for="favorite_colors">Favorite Color(s): </label>
+        <input type="checkbox" id="blue" name="favorite_colors" value="blue">
+        <label for="favorite_colors"> Blue</label>
+        <input type="checkbox" id="red" name="favorite_colors" value="red">
+        <label for="favorite_colors"> Red</label>
+        <input type="checkbox" id="orange" name="favorite_colors" value="orange">
+        <label for="favorite_colors"> Orange</label>
+        <input type="checkbox" id="pink" name="favorite_colors" value="pink">
+        <label for="favorite_colors"> Pink</label>
+        <input type="checkbox" id="Black" name="favorite_colors" value="black">
+        <label for="favorite_colors"> Black</label><br><br>
+        <label for="other_info">Enter other information about yourself (300 char max): 
+            <br><textarea name="other_info" rows="4" cols="75" maxlength="300"></textarea></label><br>
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" />
       </form>
     </div>
   </body>

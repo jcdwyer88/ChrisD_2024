@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Form Demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        <form action="" method="get">
+            <label>First Name: <input placeholder="Enter first name" type="text" name="fname" id="doggy"><br></label>
+            <label>Age: <input type="number" name="" id="" min="21"><br></label>
+            <label>Password: <input type="password" name="pw" id="password"><br></label>
+            <!-- <label>Email: <input type="email" name="emailAddress" id="email"><br></label> -->
+            <label>
+                Are you married?
+                <input type="radio" name="marital_status" id="" value="yes">Yes
+                <input type="radio" name="marital_status" id="" value="no">No
+                <input type="radio" name="marital_status" id="" value="unknown" checked>Unknown
+            </label><br>
+            <label>
+                Are you alive?
+                <input type="radio" name="is_alive" id="" value="yes" checked>Yes
+                <input type="radio" name="is_alive" id="" value="no">No
+                <input type="radio" name="is_alive" id="" value="unknown">Unknown
+            </label><br>
+            <label>Favorite Colors:
+                <input type="checkbox" name="favorite_colors" id="" value="blue">Blue
+                <input type="checkbox" name="favorite_colors" id="" value="red">Red   
+                <input type="checkbox" name="favorite_colors" id="" value="yellow">Yellow
+            </label><br>
+            <label>Tell us more!<br>
+                <textarea name="other_description" id="" cols="50" rows="5" maxlength="300"></textarea>
+            </label><br>
+            <label>State: 
+                <select name="state" id="">
+                    <option value="">Select State</option>
+                    <option value="TX">TX</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="OH">OH</option>
+                    <option value="FL">FL</option>
+                </select>
+            </label>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <script src="" async defer></script>
+    </body>
+</html>
