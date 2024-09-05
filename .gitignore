@@ -131,3 +131,5 @@ dist
 
 .DS_Store
 .vscode
+
+git config --global pager.branch false
