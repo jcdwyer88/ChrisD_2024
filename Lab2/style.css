@@ -4,33 +4,32 @@ table {
   width: 100%;
   border-collapse: collapse;
   border: 3px solid rgb(156, 25, 2);
-}
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 
+}
 /* table header and data cell formatting */
 th, td {
   padding: 10px;
   border-collapse: collapse;
   border: 1px dashed black;
 }
-
 /* typography */
 html {
   font-family: "Goudy Bookletter 1911", sans-serif;
 }
-
 /* table header */
 th {
   letter-spacing: 4px;
   font-size: x-large;
+  background-color: rgb(209, 202, 202);
   text-decoration: underline;
 }
-
 /* table data */
 td {
   letter-spacing: 1px;
+  background-color: rgb(239, 228, 228);
   text-align: center;
 }
-
 /* standard buttons */
 a.button{
   background-color: #464646;
@@ -44,55 +43,130 @@ a.button{
   cursor: pointer;
 }
 /* effects on hover for standard buttons */
-a.button:hover { 
+a.button:hover, .submitButton:hover, .resetButton:hover { 
   background-color: rgb(113, 246, 231); 
   color: rgb(82, 82, 74); 
-  box-shadow: rgba(32, 31, 31, 0.35) 0px 7px 10px; 
+  box-shadow: rgba(32, 31, 31, 0.50) 0px 7px 10px; 
   font-weight: 900; 
 }
 /* for submit buttons */
-input[type=submit]{
-  background-color: #04AA6D;
-  border: none;
+.submitButton {
+  background: rgb(5, 150, 39);
   color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  margin: 4px 2px;
+  margin: 5px 5px;
+  width: 45%;
+  height: 8%;
+  border-color: rgb(3, 114, 29);
+  border-width: 0.5px;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
   cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
-
 /* for reset buttons */
-input[type=reset] {
-  background-color: #aa1704aa;
-  border: none;
+.resetButton {
+  background: rgb(245, 76, 57);
   color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  margin: 4px 2px;
+  margin: 5px 10px;
+  width: 45%;
+  height: 8%;
+  border-color: #b20000;
+  border-width: 0.5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
   cursor: pointer;
+  font-weight: 500;
 }
 /* animation code for page title colors */
 @keyframes example {
-  0%   {background-color:rgba(255, 0, 0, 0.15); left:0px; top:0px;}
-  25%  {background-color:rgb(255, 132, 0, 0.15); left:200px; top:0px;}
-  50%  {background-color:rgba(238, 255, 6, 0.15); left:200px; top:200px;}
-  75%  {background-color:rgb(255, 132, 0, 0.15); left:0px; top:200px;}
-  100% {background-color:rgba(255, 0, 0, 0.15); left:0px; top:0px;}
+  0%   {background-color:rgba(255, 0, 0, 0.25); left:0px; top:0px;}
+  25%  {background-color:rgb(255, 132, 0, 0.25); left:200px; top:0px;}
+  50%  {background-color:rgba(238, 255, 6, 0.25); left:200px; top:200px;}
+  75%  {background-color:rgb(255, 132, 0, 0.25); left:0px; top:200px;}
+  100% {background-color:rgba(255, 0, 0, 0.25); left:0px; top:0px;}
 }
 /* element to apply the animation to */
 h1 {
-  width: 35%;
-  border-radius: 10px;
-  border-color: #000000;
-  border-width: 4px;
+  position: relative;
+  padding: 10px 0px 0px 0px;
+}
+h2 {
+  position: relative;
+  padding: 10px 0px 0px 0px;
+}
+
+body {
   animation-name: example;
-  animation-duration: 12s;
+  animation-duration: 8s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
-  box-shadow: 2px 1px 0px 1px rgba(0, 0, 0, 0.05);
+  background-blend-mode: blur;
+  font-family: Arial, Helvetica, sans-serif;
 }
+.formContainer {
+  position: relative;
+  margin: 8% auto;
+  min-height: 60%;
+  width: 40%;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+  background: white;
+  padding:0px 0px 5px 0px;
+  /* box-sizing: border-box; */
+  border: 2px;
+  border-radius: 8px;
+}
+.formHeader {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  font-style: italic;
+  padding: 10px 0px 10px 0px;
+  border-bottom: 2px dashed #787878;
+}
+.formContentContainer {
+  margin: 5%;
+}
+.formInput {
+  display: block;
+  align-items: center;
+  border-radius: 10px;
+  border-color: #000000;
+  border-width: 4px;
+  margin: 10px 0px 10px;
+  padding: 5px;
+  width: 80%;
+  height: 5%;
+  box-sizing: content-box;
+  border: solid black 1px;
+  outline: none;
+  border-bottom: 1px solid #aaa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+}
+
 /* placeholder default color */
 ::placeholder{
-  color: red;
+  color: rgb(0, 0, 0);
+  text-decoration: dashed;
+}
+
+label{
+  display: block;
+  align-items: center;
+  margin: 10px 0px 10px;
+  padding: 5px;
+  width: (formContainer);
+  height: 5%;
+  box-sizing: content-box;
+  border: none;
+  outline: none;
+  font-size: 12px;
+}
+img{
+  box-shadow: 0 2px 24px #ef7676;
+  border-radius: 58px;
 }
