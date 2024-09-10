@@ -6,13 +6,36 @@
         <title>CSS Demo</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link 
+            href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Protest+Guerrilla&display=swap" 
+            rel="stylesheet"
+        />
+        <script src="https://kit.fontawesome.com/29f11efb17.js" crossorigin="anonymous"></script>
+        <!-- Personal CSS -->
+        <link rel="stylesheet" href="stlyes.css">
+        <style>
+            #thanksgiving{
+                font-weight:bold;
+                background-color: rgb(222, 184, 135);
+            }
+        </style>
     </head>
     <body>
         <div>
-            <p>Halloween</p>
-            <p>Thanksgiving</p>
-            <p>Christmas</p>
+            <!-- Inline styling -->
+            <p style="background-color: rgb(251, 94, 42);">Halloween</p>
+            <p id="thanksgiving">Thanksgiving</p>
+            <p style="color: green; font-size: 32px;">
+                <i class="fa-solid fa-burger"></i>
+                 Christmas 
+                <i class="fa-solid fa-hotdog"></i>
+            </p>
+        </div>
+        <div id="img_container">
+            <img src="assets/Confused_Chicken.png" alt="confused chicken">
         </div>
         <script src="" async defer></script>
     </body>
