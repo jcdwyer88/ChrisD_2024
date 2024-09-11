@@ -37,21 +37,27 @@ document.querySelector("a").setAttribute("href", "http://www.amazon.com");
 // let newType = document.getElementsByTagName("input");
 // newType[0].setAttribute("type", "password");
 
-let input = document.querySelectorAll("[type='text']");
+let input = document.querySelectorAll("input");
 // input[0].setAttribute("type", "password");
 // console.log(input[0].value);
 
 let submitButton = document.querySelector('button[type="submit"]');
 submitButton.addEventListener("click", (event)=> {
     event.preventDefault(); //Stops the auto refresh default from submit button
-    let fname = input[0].value;
-    let lname = input[1].value;
-    let fullName = fname + " " + lname;
-    console.log("Full Name: " + fullName);
-    input[0].value = " ";
-    input[1].value = " ";
+    // let fname = input[0].value;
+    // let lname = input[1].value;
+    // let age = input[2].value;
+    let person = {
+        fname: input[0].value,
+        lname: input[1].value,
+        age: Number(input[2].value)
+    }
+    console.log(person);
+    console.log("Type: " + typeof(person));
+     let fullString = JSON.stringify(person);
+    console.log("Info: " + fullString);
+    console.log("Type: " + typeof(fullString));
+    input[0].value = "";
+    input[1].value = "";
+    input[2].value = "";
 })
-// let resetButton = document.querySelector('button[type="reset"]');
-// resetButton.("reset", (event)=> {
-//     event.resetButton;
-// })

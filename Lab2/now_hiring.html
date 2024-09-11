@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="assets/chicken.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Protest+Guerrilla&display=swap" 
+        rel="stylesheet"
+    />
     <link href="style.css" rel="stylesheet" media="screen" />
     <title>WTC? Application</title>
   </head>
@@ -80,12 +86,12 @@
                 <input type="email" name="email" class="formInput" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <input type="password" name="pwd" class="formInput" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[\W_]).{7,12}"
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-                <label>Marital Status: 
+                <label id="marital_status">Marital Status: 
                     <input type="radio" id="" name="marital_status" value="married">Married
                     <input type="radio" id="" name="marital_status" value="single" checked>Single
                     <input type="radio" id="" name="marital_status" value="complicated">Complicated
                 </label>
-                <label>Favorite Color(s): 
+                <label id="favorite_colors">Favorite Color(s): 
                     <input type="checkbox" name="favorite_colors" value="blue">Blue
                     <input type="checkbox" id="" name="favorite_colors" value="red">Red
                     <input type="checkbox" id="" name="favorite_colors" value="green">Green

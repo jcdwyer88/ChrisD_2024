@@ -1,3 +1,7 @@
+/* typography */
+html {
+  font-family: "Protest Guerrilla", sans-serif;
+}
 /* table spacing */
 table {
   table-layout: fixed;
@@ -10,19 +14,15 @@ table {
 /* table header and data cell formatting */
 th, td {
   padding: 10px;
-  border-collapse: collapse;
-  border: 1px dashed black;
 }
-/* typography */
-html {
-  font-family: "Goudy Bookletter 1911", sans-serif;
-}
+
 /* table header */
 th {
+  font-family: "Protest Guerrilla", sans-serif;
   letter-spacing: 4px;
   font-size: x-large;
   background-color: rgb(209, 202, 202);
-  text-decoration: underline;
+  text-shadow: 0 2px 4px #ffffff;
 }
 /* table data */
 td {
@@ -32,6 +32,7 @@ td {
 }
 /* standard buttons */
 a.button{
+  font-family: "Protest Guerrilla", sans-serif;
   background-color: #464646;
   border: 1px solid white;
   color: white;
@@ -42,43 +43,45 @@ a.button{
   border-radius: 10px;
   cursor: pointer;
 }
+/* for submit buttons */
+.submitButton {
+  display: inline-block;
+  font-family: "Protest Guerrilla", sans-serif;
+  background: rgb(5, 150, 39);
+  color: white;
+  margin: 5px auto;
+  width: 30%;
+  height: 20px;
+  border: rgb(3, 114, 29) solid 0.5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bolder;
+}
+/* for reset buttons */
+.resetButton {
+  display: inline-block;
+  font-family: "Protest Guerrilla", sans-serif;
+  background: rgb(245, 76, 57);
+  color: white;
+  margin: 5px auto;
+  width: 30%;
+  height: 20px;
+  border: #b20000 solid 0.5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bolder;
+}
 /* effects on hover for standard buttons */
 a.button:hover, .submitButton:hover, .resetButton:hover { 
   background-color: rgb(113, 246, 231); 
   color: rgb(82, 82, 74); 
   box-shadow: rgba(32, 31, 31, 0.50) 0px 7px 10px; 
   font-weight: 900; 
-}
-/* for submit buttons */
-.submitButton {
-  background: rgb(5, 150, 39);
-  color: white;
-  margin: 5px 5px;
-  width: 45%;
-  height: 8%;
-  border-color: rgb(3, 114, 29);
-  border-width: 0.5px;
-  border: none;
-  border-radius: 4px;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-}
-/* for reset buttons */
-.resetButton {
-  background: rgb(245, 76, 57);
-  color: white;
-  margin: 5px 10px;
-  width: 45%;
-  height: 8%;
-  border-color: #b20000;
-  border-width: 0.5px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: 500;
+  transform: scale(1.25);
 }
 /* animation code for page title colors */
 @keyframes example {
@@ -91,11 +94,13 @@ a.button:hover, .submitButton:hover, .resetButton:hover {
 /* element to apply the animation to */
 h1 {
   position: relative;
-  padding: 10px 0px 0px 0px;
+  font-family: "Protest Guerrilla", sans-serif;
+  padding-top: 10px;
 }
 h2 {
   position: relative;
-  padding: 10px 0px 0px 0px;
+  font-family: "Protest Guerrilla", sans-serif;
+  padding-top: 10px;
 }
 
 body {
@@ -108,36 +113,33 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .formContainer {
-  position: relative;
-  margin: 8% auto;
-  min-height: 60%;
-  width: 40%;
+  margin: 2% auto;
+  width: 60%;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
-  background: white;
-  padding:0px 0px 5px 0px;
-  /* box-sizing: border-box; */
-  border: 2px;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  padding-bottom: 5px;
+  border: 2px gray;
+  border-radius: 20px;
 }
 .formHeader {
   text-align: center;
+  font-family: "Protest Guerrilla", sans-serif;
   font-size: x-large;
-  font-weight: bold;
   font-style: italic;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0px;
   border-bottom: 2px dashed #787878;
+  border-radius: 5px;
 }
 .formContentContainer {
-  margin: 5%;
+  margin: 5px;
 }
 .formInput {
   display: block;
   align-items: center;
   border-radius: 10px;
-  border-color: #000000;
-  border-width: 4px;
-  margin: 10px 0px 10px;
-  padding: 5px;
+  border-color: #000000 solid 4px;
+  margin: 10px;
+  padding: 10px;
   width: 80%;
   height: 5%;
   box-sizing: content-box;
@@ -146,6 +148,21 @@ body {
   border-bottom: 1px solid #aaa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   font-size: 12px;
+}
+input:hover, textarea:hover, select:hover { 
+  background-color: rgb(113, 246, 231); 
+  color: rgb(82, 82, 74); 
+  box-shadow: rgba(32, 31, 31, 0.50) 0px 7px 10px; 
+  font-weight: bolder; 
+  transform: scale(1.1);
+}
+#favorite_colors:hover, #marital_status:hover { 
+  background-color: rgb(113, 246, 231); 
+  color: rgb(82, 82, 74); 
+  box-shadow: rgba(32, 31, 31, 0.50) 0px 7px 10px; 
+  font-weight: bolder; 
+  max-width: fit-content;
+  transform: scale(1.1);
 }
 
 /* placeholder default color */
