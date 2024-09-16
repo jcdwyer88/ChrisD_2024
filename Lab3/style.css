@@ -16,7 +16,7 @@ p{
 }
 
 /* 4. Apply a font size of 20px to all <span> elements inside <div>  */
-span {
+div span {
     font-size: 20px;
     display: block; /* 21. Change the display property of all <span> elements to block */
 }
