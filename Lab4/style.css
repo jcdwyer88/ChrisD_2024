@@ -126,10 +126,9 @@ body {
   font-style: italic;
   padding: 10px 0px;
   border-bottom: 2px dashed #787878;
-  border-radius: 5px;
 }
 .formContentContainer {
-  margin: 5px;
+  margin: 15px;
 }
 .formInput {
   display: block;
