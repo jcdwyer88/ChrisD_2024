@@ -1,0 +1,20 @@
+{
+  "name": "nodedemo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pokemon",
+    "character",
+    "dog",
+    "blue"
+  ],
+  "author": "JD",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cat-me": "^1.0.3"
+  }
+}
