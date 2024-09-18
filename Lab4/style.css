@@ -30,7 +30,8 @@ td {
   background-color: rgb(239, 228, 228);
   text-align: center;
 }
-/* standard buttons */
+
+
 a.button, .nav-item{
   font-family: "Protest Guerrilla", sans-serif;
   background-color: #000000;
@@ -40,38 +41,7 @@ a.button, .nav-item{
   border-radius: 10px;
   cursor: pointer;
 }
-/* for submit buttons */
-.submitButton {
-  display: inline-block;
-  font-family: "Protest Guerrilla", sans-serif;
-  background: rgb(5, 150, 39);
-  color: white;
-  margin: 5px auto;
-  width: 30%;
-  height: 20px;
-  border: rgb(3, 114, 29) solid 0.5px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bolder;
-}
-/* for reset buttons */
-.resetButton {
-  display: inline-block;
-  font-family: "Protest Guerrilla", sans-serif;
-  background: rgb(245, 76, 57);
-  color: white;
-  margin: 5px auto;
-  width: 30%;
-  height: 20px;
-  border: #b20000 solid 0.5px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bolder;
-}
+
 /* effects on hover for standard buttons */
 /* a.button:hover, */
  .nav-item:hover, .submitButton:hover, .resetButton:hover { 
@@ -127,59 +97,27 @@ body {
   padding: 10px 0px;
   border-bottom: 2px dashed #787878;
 }
+.formFooter {
+  text-align: center;
+  font-family: "Protest Guerrilla", sans-serif;
+  font-size: x-large;
+  font-style: italic;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px dashed #787878;
+}
 .formContentContainer {
   margin: 15px;
 }
-.formInput {
-  display: block;
-  align-items: center;
-  border-radius: 10px;
-  border-color: #000000 solid 4px;
-  margin: 10px;
-  padding: 10px;
-  width: 80%;
-  height: 5%;
-  box-sizing: content-box;
-  border: solid black 1px;
-  outline: none;
-  border-bottom: 1px solid #aaa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  font-size: 12px;
-}
+
 input:hover, textarea:hover, select:hover { 
   background-color: rgb(113, 246, 231); 
   color: rgb(82, 82, 74); 
-  box-shadow: rgba(32, 31, 31, 0.50) 0px 7px 10px; 
+  box-shadow: rgba(32, 31, 31, 0.50) 0px 10px 7px 0px; 
   font-weight: bolder; 
-  transform: scale(1.1);
-}
-#favorite_colors:hover, #marital_status:hover { 
-  background-color: rgb(113, 246, 231); 
-  color: rgb(82, 82, 74); 
-  box-shadow: rgba(32, 31, 31, 0.50) 0px 7px 10px; 
-  font-weight: bolder; 
-  max-width: fit-content;
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
-/* placeholder default color */
-::placeholder{
-  color: rgb(0, 0, 0);
-  text-decoration: dashed;
-}
-
-label{
-  display: block;
-  align-items: center;
-  margin: 10px 0px 10px;
-  padding: 5px;
-  width: (formContainer);
-  height: 5%;
-  box-sizing: content-box;
-  border: none;
-  outline: none;
-  font-size: 12px;
-}
 
 #background_image {
   width: 33vw;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 5</title>
+</head>
+<body>
+    <h1>Unordered Dog Breeds List</h1>
+    <ul id="dogBreedsList"></ul>
+    <button id="addBreedsButton">Add Dog Breeds to Unordered List</button>
+    <script>
+        const dogBreeds = ["English Bulldogs", "Mastiff", "Mutt"];
+
+        document.getElementById('addBreedsButton').addEventListener('click', () => {
+            const list = document.getElementById('dogBreedsList');
+            list.innerHTML = ''; 
+            dogBreeds.forEach(breed => {
+                const listItem = document.createElement('li');
+                listItem.textContent = breed;
+                list.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+</html>

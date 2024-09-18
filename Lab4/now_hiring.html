@@ -49,7 +49,7 @@
 
     <div class="formContainer">
       <div class="formContentContainer">
-        <label class="formHeader">Application</label>
+        <label class="formHeader col-md-12">Application</label>
         <form class="row g-3">
           <div class="col-md-6">
             <label for="inputFirstName" class="form-label">First Name</label>
@@ -149,10 +149,12 @@
             <input type="password" class="form-control" id="inputPassword4">
           </div>
           <div class="col-md-6">
-            <label id="marital_status">Marital Status: 
-              <input type="radio" id="" name="marital_status" value="married">Married
-              <input type="radio" id="" name="marital_status" value="single" checked>Single
-              <input type="radio" id="" name="marital_status" value="complicated">Complicated
+            <label>Marital Status: 
+              <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
+              <label class="btn" for="option5">Checked</label>
+              <input type="radio" class="radioButton" id="married" name="marital_status" value="married">Married
+              <input type="radio" id="single" name="marital_status" value="single" checked>Single
+              <input type="radio" id="complicated" name="marital_status" value="complicated">Complicated
             </label>
           </div>
           <div class="col-md-6">
@@ -164,109 +166,15 @@
                 <input type="checkbox" id="" name="favorite_colors" value="black">Black
             </label>
           </div>
-          <div class="col-12">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
-              <label class="form-check-label" for="gridCheck">
-                Check me out
-              </label>
-            </div>
-          </div>
           <div class="col-md-12">
-            <button type="submit" class="btn btn-success">Submit</button>
-            <button type="reset" class="btn btn-danger">Reset</button>
+            <textarea class="form-control" aria-label="With textarea" placeholder="Enter additional information (30 char max)" maxlength="30"></textarea>
           </div>
-          <div class="col-md-6">
+          <div class="formFooter col-md-12">
+            <button type="submit" class="btn btn-success";>Submit</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
           </div>
         </form>
       </div>
-    </div>
-
-    <div class="formContainer">
-        <center><label class="formHeader">Application</label></center>
-        <div class="formContentContainer">
-            <form action="" method="get"><center>
-                <input type="text" name="fname" class="formInput" placeholder="First Name" maxlength="20" required/>
-                <input type="text" name="lname" class="formInput" placeholder="Last Name" maxlength="20" />
-                <input type="text" name="address1" class="formInput" placeholder="Address" required />
-                <input type="text" name="address2" class="formInput" placeholder="First Name" />
-                <input type="text" name="city" class="formInput" placeholder="City" maxlength="30" size="20" required/>
-                <select name="state" class="formInput" placeholder="First Name" required>
-                    <option value="">Select a State</option>
-                    <option value="AL">AL</option>
-                    <option value="AK">AK</option>
-                    <option value="AZ">AZ</option>
-                    <option value="AR">AR</option>
-                    <option value="CA">CA</option>
-                    <option value="CO">CO</option>
-                    <option value="CT">CT</option>
-                    <option value="DE">DE</option>
-                    <option value="DC">DC</option>
-                    <option value="FL">FL</option>
-                    <option value="GA">GA</option>
-                    <option value="HI">HI</option>
-                    <option value="ID">ID</option>
-                    <option value="IL">IL</option>
-                    <option value="IN">IN</option>
-                    <option value="IA">IA</option>
-                    <option value="KS">KS</option>
-                    <option value="KY">KY</option>
-                    <option value="LA">LA</option>
-                    <option value="ME">ME</option>
-                    <option value="MD">MD</option>
-                    <option value="MA">MA</option>
-                    <option value="MI">MI</option>
-                    <option value="MN">MN</option>
-                    <option value="MS">MS</option>
-                    <option value="MO">MO</option>
-                    <option value="MT">MT</option>
-                    <option value="NE">NE</option>
-                    <option value="NV">NV</option>
-                    <option value="NH">NH</option>
-                    <option value="NJ">NJ</option>
-                    <option value="NM">NM</option>
-                    <option value="NY">NY</option>
-                    <option value="NC">NC</option>
-                    <option value="ND">ND</option>
-                    <option value="OH">OH</option>
-                    <option value="OK">OK</option>
-                    <option value="OR">OR</option>
-                    <option value="PA">PA</option>
-                    <option value="RI">RI</option>
-                    <option value="SC">SC</option>
-                    <option value="SD">SD</option>
-                    <option value="TN">TN</option>
-                    <option value="TX">TX</option>
-                    <option value="UT">UT</option>
-                    <option value="VT">VT</option>
-                    <option value="VA">VA</option>
-                    <option value="WA">WA</option>
-                    <option value="WV">WV</option>
-                    <option value="WI">WI</option>
-                    <option value="WY">WY</option></select>
-                <input type="number" name="age" class="formInput" placeholder="Age" min="21" max="99" />
-                <input type="tel" name="phone" class="formInput" placeholder="Format: 111-222-3333" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"">
-                <input type="email" name="email" class="formInput" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <input type="password" name="pwd" class="formInput" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[\W_]).{7,12}"
-                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-                <label id="marital_status">Marital Status: 
-                    <input type="radio" id="" name="marital_status" value="married">Married
-                    <input type="radio" id="" name="marital_status" value="single" checked>Single
-                    <input type="radio" id="" name="marital_status" value="complicated">Complicated
-                </label>
-                <label id="favorite_colors">Favorite Color(s): 
-                    <input type="checkbox" name="favorite_colors" value="blue">Blue
-                    <input type="checkbox" id="" name="favorite_colors" value="red">Red
-                    <input type="checkbox" id="" name="favorite_colors" value="green">Green
-                    <input type="checkbox" id="" name="favorite_colors" value="orange">Orange
-                    <input type="checkbox" id="" name="favorite_colors" value="black">Black
-                </label>
-                <textarea name="other_info" class="formInput" placeholder="Enter additional information (30 char max)" 
-                rows="4" maxlength="30"></textarea>
-                <input type="submit" class="submitButton" value="Submit">
-                <input type="reset" class="resetButton" value="Reset">
-            </center></form>
-        </div>
     </div>
   </body>
 </html>

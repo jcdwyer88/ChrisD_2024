@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Exam Part 2</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <button id="button">Click Me</button>
+        <p id="message" style="text-align: center; font-size: 36em;"></p>
+        
+        <script>
+        document.getElementById('button').addEventListener('click', () => {
+            const paragraph = document.getElementById('message');
+            const newParagraph = "I am a bunch of text and when submitted I should be centered. If not, then I might need to do some more research on how to do.";
+            paragraph.textContent = newParagraph;
+            paragraph.style.fontSize = "36em";
+            paragraph.style.textAlign = "center";
+            });
+        </script>
+    </body>
+</html>

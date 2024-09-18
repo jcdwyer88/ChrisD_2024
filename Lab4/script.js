@@ -6,7 +6,7 @@ const imgArray = [
     "chicken-nuggets.jpg"];
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("prev");
-const img = document.getElementsByTagName("img");
+const img#menu_item = document.getElementsByTagName("img");
 
 let counter = 0;
 
@@ -15,7 +15,7 @@ nextBtn.addEventListener("click", ()=> {
     if(counter >= imgArray.length) {
         counter = 0;
     } else {
-        let path = `./assets/${imgArray[counter]}`;
+        let path = `/assets/${imgArray[counter]}`;
         img[0].src = path;
     }
 })
