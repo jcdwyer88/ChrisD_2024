@@ -95,3 +95,11 @@ nav>div {
   box-shadow: 0 2px 24px #bababa;
   border-radius: 10px;
 }
+
+.menu-item{
+  width: 30vw;
+  height: fit-content;
+  padding: 5px;
+  margin: 5px;
+  border: #000000 dashed 2px;
+}
