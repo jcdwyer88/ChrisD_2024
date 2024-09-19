@@ -3,28 +3,37 @@ const imgArray = [
     "5pc-chicken-strip.jpg", 
     "bone-in-wings.jpg",
     "boneless-wings.jpg",
-    "chicken-nuggets.jpg"];
+    "chicken-nuggets.jpg"
+];
+
+const img = document.getElementsByClassName("menu-item");
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("prev");
-const img#menu_item = document.getElementsByTagName("img");
-
 let counter = 0;
 
-nextBtn.addEventListener("click", ()=> {
+// Function to update the image source
+function updateImage() {
+    const path = `/assets/${imgArray[counter]}`;
+    img[0].src = path;
+}
+
+nextBtn.addEventListener('click', (event) => {
+    event.preventDefault();
     counter++;
-    if(counter >= imgArray.length) {
-        counter = 0;
-    } else {
-        let path = `/assets/${imgArray[counter]}`;
-        img[0].src = path;
+    if (counter >= imgArray.length) {
+        counter = 0; // Loop back to the first image
     }
-})
-prevBtn.addEventListener("click", ()=> {
+    updateImage();
+});
+
+prevBtn.addEventListener('click', (event) => {
+    event.preventDefault();
     counter--;
-    if(counter <= 0) {
-        counter = imgArray.length;
-    } else {
-        let path = `./assets/${imgArray[counter]}`;
-        img[0].src = path;
+    if (counter < 0) {
+        counter = imgArray.length - 1; // Loop back to the last image
     }
-})
+    updateImage();
+});
+
+// Initial image display
+updateImage();
