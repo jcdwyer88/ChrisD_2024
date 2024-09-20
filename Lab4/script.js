@@ -1,30 +1,40 @@
-const imgArray = [
-    "3pc-chicken-strip.jpg", 
-    "5pc-chicken-strip.jpg",
-    "bone-in-wings.jpg",
-    "boneless-chicken-wings.jpg",
-    "chicken-nuggets.jpg"
-];
-const titleArray = [
-    "3pc Chicken Strips", 
-    "5pc Chicken Strips",
-    "Bone In Wings",
-    "Boneless Chicken Wings",
-    "Chicken Nuggets"
-];
-const priceArray = [
-    "$5.99", 
-    "$8.99", 
-    "$9.99", 
-    "$12.99", 
-    "$5.99" 
-];
-const descArray = [
-    "3pc Juicy Chicken Strips that are 4 inces long each", 
-    "5pc Juicy Chicken Strips that are 4 inches long each",
-    "The most flavorful of the selections",
-    "Extra cripsy and tossed in wet sauce or dry rub",
-    "Kid friendly or adult with weird habits approved"
+// MENU Script
+const menuArray = [
+    {
+        image: "3pc-chicken-strip.jpg",
+        alt: "3 piece chicken strip on plate",
+        title: "1: 3pc Chicken Strips",
+        price: "5.99",
+        description: "3pc Juicy Chicken Strips that are 4 inches long each"
+    },
+    {
+        image: "5pc-chicken-strip.jpg",
+        alt: "5 piece chicken strip on plate",
+        title: "2: 5pc Chicken Strips",
+        price: "8.99",
+        description: "5pc Juicy Chicken Strips that are 4 inches long each"
+    },
+    {
+        image: "bone-in-wings.jpg",
+        alt: "Bone in chicken wings on plate",
+        title: "3: Bone In Wings",
+        price: "9.99",
+        description: "The most flavorful of the selections"
+    },
+    {
+        image: "boneless-chicken-wings.jpg",
+        alt: "Boneless chicken wings on plate",
+        title: "4: Boneless Wings",
+        price: "12.99",
+        description: "Extra crispy and tossed in wet sauce or dry rub"
+    },
+    {
+        image: "chicken-nuggets.jpg",
+        alt: "Chicken nuggets on plate",
+        title: "5: Chicken Nuggets",
+        price: "4.99",
+        description: "Kid friendly or adult with weird habits approved"
+    }
 ];
 
 const img = document.getElementsByClassName("menu-item");
@@ -32,33 +42,31 @@ const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("prev");
 let counter = 0;
 
-// Function to update the image source
-function updateCard(c) {
-    const path = `/Lab4/assets/${imgArray[c]}`;
+// Function to update the information on the card
+function updateCard() {
+    const path = `/Lab4/assets/${menuArray[counter].image}`;
     img[0].src = path;
-    const title = `/Lab4/assets/${titleArray[c]}`;
-    document.getElementById("card-title").textContent = titleArray[c];
-    const price = `/Lab4/assets/${priceArray[c]}`;
-    document.getElementById("price").textContent = priceArray[c];
-    const desc = `/Lab4/assets/${descArray[c]}`;
-    document.getElementById("description").textContent = descArray[c];
+    img[0].alt = menuArray[counter].alt;
+    document.getElementById("card-title").innerText = menuArray[counter].title;
+    document.getElementById("price").innerText = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(menuArray[counter].price);
+    document.getElementById("description").innerText = menuArray[counter].description;
 }
-
-nextBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (counter > imgArray.length - 1) {
+// Function to move to the next image in the array onclick of next button
+function nextImage() {
+    counter++
+    if (counter >= menuArray.length) {
         counter = 0; // Loop back to the first image
     }
-    updateCard(counter++);
-});
-
-prevBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (counter <= 1) {
-        counter = imgArray.length - 1; // Loop back to the last image
+    updateCard();
+}
+// Function to move to the previous image in the array onclick of prev button
+function prevImage() {
+    counter--;
+    if (counter < 0) {
+        counter = menuArray.length - 1; // Loop back to the last image
     }
-    updateCard(counter--);
-});
-
+    updateCard();
+}
 // Initial image display
-updateCard(counter);
+updateCard();
+// END MENU SCRIPT

@@ -78,34 +78,24 @@
     <div class="formContainer">
       <div class="formContentContainer">
         <label class="formHeader col-md-12">Application</label>
-        <form class="row g-3">
-          <div class="col-md-6">
+        <form class="row g-3" id="form1" onsubmit="getFormValue(event)">
+          <div class="col-md-6" name="inputFirstName">
             <label for="inputFirstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="inputFirstName" />
+            <input type="text" class="form-control" id="inputFirstName">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" name="inputLastName">
             <label for="inputLastName" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="inputLastName" />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" name="inputAge">
             <label for="inputAge" class="form-label">Age</label>
-            <input
-              type="number"
-              class="form-control"
-              id="inputAge"
-              min="21"
-              max="99"
-            />
+            <input type="String" class="form-control" id="inputAge" onblur="validateAge()" required/>
           </div>
-          <div class="col-md-6">
-            <label for="inputPhoneNumber" class="form-label"
-              >Phone Number</label
-            >
-            <input type="tel" class="form-control" id="inputPhoneNumber"
-            placeholder="Format: 111-222-3333"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"">
+          <div class="col-md-6" name="phoneNumber">
+            <label for="inputPhoneNumber" class="form-label">Phone Number</label>
+            <input type="tel" name="inputPhoneNumber" class="form-control" id="inputPhoneNumber" onblur="validatePhoneNumber()"required>
           </div>
-          <div class="col-12">
+          <div class="col-12" name="inputAddress">
             <label for="inputAddress" class="form-label">Address</label>
             <input
               type="text"
@@ -114,7 +104,7 @@
               placeholder="1234 Main St"
             />
           </div>
-          <div class="col-12">
+          <div class="col-12" name="inputAddress2">
             <label for="inputAddress2" class="form-label">Address 2</label>
             <input
               type="text"
@@ -123,11 +113,11 @@
               placeholder="Apartment, studio, or floor"
             />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" name="inputCity">
             <label for="inputCity" class="form-label">City</label>
             <input type="text" class="form-control" id="inputCity" />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" name="inputState">
             <label for="inputState" class="form-label">State</label>
             <select id="inputState" class="form-control">
               <option selected>Choose...</option>
@@ -184,90 +174,39 @@
               <option value="WY">WY</option>
             </select>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2" name="inputZip">
             <label for="inputZip" class="form-label">Zip</label>
             <input type="text" class="form-control" id="inputZip" />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" name="inputEmail">
             <label for="inputEmail4" class="form-label">Email</label>
             <input type="email" class="form-control" id="inputEmail4" />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" name="inputPassword">
             <label for="inputPassword4" class="form-label">Password</label>
             <input type="password" class="form-control" id="inputPassword4" />
           </div>
-          <div class="col-md-6">
-            <label
-              >Marital Status:
-              <input
-                type="radio"
-                class="btn-check"
-                name="options-base"
-                id="option5"
-                autocomplete="off"
-                checked
-              />
-              <label class="btn" for="option5">Checked</label>
-              <input
-                type="radio"
-                class="radioButton"
-                id="married"
-                name="marital_status"
-                value="married"
-              />Married
-              <input
-                type="radio"
-                id="single"
-                name="marital_status"
-                value="single"
-                checked
-              />Single
-              <input
-                type="radio"
-                id="complicated"
-                name="marital_status"
-                value="complicated"
-              />Complicated
+          <div class="col-md-6" name="maritalStatus">
+            <label>Marital Status:
+              <input type="radio" class="radioButton" id="married" name="marital_status" value="married"/>Married
+              <input type="radio" id="single" name="marital_status" value="single"/>Single
+              <input type="radio" id="complicated" name="marital_status" value="unknown" checked/>Unknown
             </label>
           </div>
-          <div class="col-md-6">
-            <label id="favorite_colors"
-              >Favorite Color(s):
+          <div class="col-md-6" class="favColors">
+            <label id="favorite_colors">Favorite Color(s):
               <input type="checkbox" name="favorite_colors" value="blue" />Blue
-              <input
-                type="checkbox"
-                id=""
-                name="favorite_colors"
-                value="red"
-              />Red
-              <input
-                type="checkbox"
-                id=""
-                name="favorite_colors"
-                value="green"
-              />Green
-              <input
-                type="checkbox"
-                id=""
-                name="favorite_colors"
-                value="orange"
-              />Orange
-              <input
-                type="checkbox"
-                id=""
-                name="favorite_colors"
-                value="black"
-              />Black
+              <input type="checkbox" name="favorite_colors"value="red"/>Red
+              <input type="checkbox" name="favorite_colors" value="green"/>Green
+              <input type="checkbox" name="favorite_colors" value="orange"/>Orange
+              <input type="checkbox" name="favorite_colors" value="black"/>Black
             </label>
           </div>
-          <div class="col-md-12">
-            <textarea
-              class="form-control"
-              aria-label="With textarea"
-              placeholder="Enter additional information (30 char max)"
-              maxlength="30"
-            ></textarea>
+          <div class="col-md-10" class="textArea">
+            <textarea class="form-control" id="textArea"
+            placeholder="Enter additional information (30 char max)"></textarea>
           </div>
+          <h6 id="charCounter">30 characters remaining</h6>
           <div class="formFooter col-md-12">
             <button type="submit" class="btn btn-success" ;>Submit</button>
             <button type="reset" class="btn btn-danger">Reset</button>
@@ -275,5 +214,7 @@
         </form>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script2.js"></script>
   </body>
 </html>
