@@ -60,12 +60,6 @@ charCounter.textContent = `${maxChars} characters remaining`;
 function getFormValue(e) {
     e.preventDefault();
 
-    // const form = document.getElementsByTagName('form');
-    // let inputs = document.getElementsByTagName('input');
-    // let selects = document.getElementsByTagName('select')
-    // let textArea = document.getElementsByTagName('textarea');
-
-    // let all = form.querySelectorAll('input, textarea, select');
     const allInputs = document.querySelectorAll('input, textarea, select');
  
     let formObj = {};
@@ -82,9 +76,7 @@ function getFormValue(e) {
         } else {
             formObj[input.id] = input.value;
         }
-        // console.log(input.id + ": " + input.value);
     });
-
     console.log(formObj);
 }
 // END APPLICATION SCRIPT
