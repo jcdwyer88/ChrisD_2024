@@ -1,4 +1,4 @@
-import { Person } from "./helper";'./helper';
+import {Person, getFullName} from "./helper";
 
 let people: Person[] = [
     {
@@ -6,9 +6,6 @@ let people: Person[] = [
         lname: "of the jungle",
         isMarried: true,
         children: [],
-        getFullName: function () {
-            return `${this.fname} ${this.lname}`
-        },
         getAge(num, fname) {
             console.log(fname + num);
             return num * 10;
@@ -16,6 +13,6 @@ let people: Person[] = [
     }
 ]
 
-console.log(people[0].getFullName());
+console.log(getFullName);
 console.log(people[0].getAge(34, people[0].fname));
 
