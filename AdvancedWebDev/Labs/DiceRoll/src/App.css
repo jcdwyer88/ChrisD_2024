@@ -1,0 +1,26 @@
+body {
+  justify-content: center;
+}
+
+.app {
+  font-family: cursive;
+  text-align: center;
+  margin: auto;
+  width: 50vw;
+  border: 3px solid #ea3c3c;
+}
+
+.dice {
+  display: inline-block;
+  font-size: 150px;
+  color: #ea3c3c;
+  padding: 5px;
+}
+
+.button {
+  border: 3px solid #ea3c3c;
+  background-color: black;
+  padding: 10px 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
