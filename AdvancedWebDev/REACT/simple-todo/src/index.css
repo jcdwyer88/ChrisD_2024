@@ -66,14 +66,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-body {
-  background: radial-gradient(circle closest-corner at 30% 60%, rgb(245, 25, 25) 15%, rgba(35, 35, 35, 0.5) 50%),
-   url("../public/images/chickens.jpg")no-repeat fixed center;
-  background-size: cover;
-  background-blend-mode: color-dodge;
-}
-
-h1 {
-  text-shadow: 10px 10px 10px black;
-}
