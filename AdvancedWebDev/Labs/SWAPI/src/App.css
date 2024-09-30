@@ -1,0 +1,50 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./assets/death_star.jpg');
+  background-size: cover;
+  color: white;
+}
+
+.app-container {
+  padding: 20px;
+  text-align: center;
+}
+
+table {
+  margin-top: 20px;
+  width: 80vw;
+  border-collapse: collapse;
+  background-color: rgb(173, 216, 230, 0.7);
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: rgba(18, 14, 243, 0.7);
+}
+
+button.show-table {
+  background-color: green;
+  border: black 2px solid;
+}
+
+button.reset-table {
+  background-color: darkred;
+  border: black 2px solid;
+}
