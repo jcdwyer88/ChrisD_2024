@@ -3,20 +3,20 @@ import axios from 'axios';
 import { Table } from './Table';
 import '../App.css'
 
-const endpoint = `https://swapi.dev/api/people/`;
-
 export function App() {
   const [data, setData] = useState([]);
   const [showTable, setShowTable] = useState(false);
 
   const handleSubmit = () => {
+    const endpoint = `https://swapi.dev/api/people/`;
+
     axios
     .get(endpoint)
     .then(response => setData(response.data.results))
     .then(() => setShowTable(true))
     .catch(error => {
       console.log('Error', error.message)
-    })
+    })    
   }
 
   const handleReset = () => {

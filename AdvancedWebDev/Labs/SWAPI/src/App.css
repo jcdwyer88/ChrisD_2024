@@ -18,6 +18,7 @@ table {
   width: 80vw;
   border-collapse: collapse;
   background-color: rgb(173, 216, 230, 0.7);
+  box-shadow: 8px 8px 20px rgb(186, 220, 226);
 }
 
 th, td {
@@ -28,6 +29,12 @@ th, td {
 
 th {
   background-color: rgba(18, 14, 243, 0.7);
+  font-weight: bolder
+}
+
+td {
+  color: black;
+  font-weight: bold;
 }
 
 button {
@@ -44,6 +51,6 @@ button.reset-table {
   border: black 2px solid;
 }
 
-/* div.title {
-  margin: 0 auto;
+/* .title {
+  vertical-align: 0px;
 } */
