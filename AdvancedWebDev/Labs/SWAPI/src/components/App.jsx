@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import { Table } from './Table';
+import { Container, Box, Button } from '@mui/material'
 import '../App.css'
 
 export function App() {
@@ -25,22 +26,24 @@ export function App() {
   };
 
   return (
-    <>
-      <div className="title">
-        <h1>SWAPI</h1>
-        <h2>The Star Wars API</h2>
-      </div>
-      <div>
-        <button className='show-table' onClick={handleSubmit}>
+    <Container fixed sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh', paddingTop: '20px' }}>
+      <Box sx={{ marginBottom: '20px' }}>
+        <div className="title">
+          <h1 style={{ margin: 0 }}>SWAPI</h1>
+          <h2 style={{ margin: 0 }}>The Star Wars API</h2>
+        </div>
+      </Box>
+      <Box sx={{ marginBottom: '20px' }}>
+        <Button variant="contained" className='show-table' onClick={handleSubmit}>
           Show Table
-        </button>
-        <button className="reset-table" onClick={handleReset}>
+        </Button>
+        <Button variant="contained" className="reset-table" onClick={handleReset} style={{ marginLeft: '10px' }}>
           Reset Table
-        </button>
-      </div>
-      <div className='table'>
+        </Button>
+      </Box>
+      <Box className='table'>
         {showTable && <Table data={data} />}
-      </div>
-    </>
+      </Box>
+    </Container>
   )
 }
