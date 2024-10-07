@@ -3,15 +3,17 @@ import { Home } from './components/Home'
 import { About } from './components/About'
 import { Contact } from './components/Contact'
 import axios from 'axios'
-import Button from '@mui/material/Button'
+import { Button, Container } from '@mui/material'
 import MovieCard from './components/MovieCard'
 import { useState } from 'react'
 import './App.css'
+import AppAppBar from './components/NavBar'
 
 function App() {
-
+  const { VITE_TMDB_API_TOKEN } = process.env;
   const [movies, setMovies] = useState([])
   const baseUrl = "https://www.themoviedb.org/3/"
+
   const handleClick = () => {
     console.log("Clicked");
     const options = {
@@ -20,7 +22,7 @@ function App() {
       params: {language: 'en-US', page: '1'},
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer 1b235de75a938768ce06f3ad06556b23'
+        Authorization: `Bearer ${VITE_TMDB_API_TOKEN}`
       }
     };
 
@@ -37,9 +39,10 @@ function App() {
 
   return (
     <>
-      <Router>
+      <AppAppBar />
+      {/* <Router>
         <div className='App'>
-          <div className="container" s>
+          <div className="container">
             <ul>
               <li><Link to="/home">Home</Link></li>
               <li><Link to="/about">About</Link></li>
@@ -55,7 +58,7 @@ function App() {
             </Routes>
           </div>
         </div>
-      </Router>
+      </Router> */}
       <div className="container">
         <Button variant="contained" color="success" onClick={handleClick}>Now Playing</Button>
       </div>

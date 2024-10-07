@@ -7,15 +7,15 @@ import CardActionArea from '@mui/material/CardActionArea';
 export default function MovieCard({newMovie}) {
     const baseURL = `https://image.tmdb.org/t/p/w500${newMovie.poster_path}`
     return (
-        <Card sx={{ maxWidth: 345, height: "30vh", margin: "20px", overflow: "scroll", display: "inline-block" }}>
+        <Card variant='soft' sx={{ maxWidth: "20vw", height: "400px", margin: "20px", overflow: "scroll", display: "inline-block", boxShadow: "10px 10px 10px black" }}>
             <CardActionArea>
                 <CardMedia
                 component="img"
                 sx={{
-                    height: "360px", 
+                    height: "240px", 
                     width: "100%", 
                     objectFit: "contain", 
-                    backgroundColor: "black"
+                    backgroundColor: "grey"
                 }}             
                 image={baseURL}
                 alt= {newMovie.title}
