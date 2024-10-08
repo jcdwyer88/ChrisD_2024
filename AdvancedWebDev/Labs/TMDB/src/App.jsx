@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import { Home } from './components/Home'
-import { About } from './components/About'
-import { Contact } from './components/Contact'
+import { Results } from './components/Results'
 import axios from 'axios'
 import { Button, Container } from '@mui/material'
 import MovieCard from './components/MovieCard'
 import { useState } from 'react'
 import './App.css'
-import AppAppBar from './components/NavBar'
+import NavBar from './components/NavBar'
+import { useEffect } from 'react'
+
 
 function App() {
   const { VITE_TMDB_API_TOKEN } = process.env;
@@ -39,30 +40,14 @@ function App() {
 
   return (
     <>
-      <AppAppBar />
-      {/* <Router>
-        <div className='App'>
-          <div className="container">
-            <ul>
-              <li><Link to="/home">Home</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-            </ul>
-            <hr />
-          </div>
-          <div className="container">
-            <Routes>
-              <Route path="/home" element={<Home/>} />
-              <Route path="/about" element={<About/>} />
-              <Route path="/contact" element={<Contact/>} />
-            </Routes>
-          </div>
-        </div>
-      </Router> */}
-      <div className="container">
-        <Button variant="contained" color="success" onClick={handleClick}>Now Playing</Button>
-      </div>
-      {movies}
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/home" element={<Home/>} />
+        <Route path="/results" element={<Results/>} />
+        {/* <Route path="/contact" element={<Contact/>} /> */}
+      </Routes>
+    </Router>
     </>
   )
 }

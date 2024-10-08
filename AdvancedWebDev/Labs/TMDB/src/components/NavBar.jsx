@@ -1,105 +1,143 @@
-import { Home } from './Home'
-import { About } from './About'
-import { Contact } from './Contact'
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import * as React from 'react';
-import { alpha, styled } from '@mui/material/styles';
-import { Box, AppBar, Toolbar, Button, IconButton, Container, Divider, MenuItem, Drawer } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-// import Sitemark from './SitemarkIcon';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  flexShrink: 0,
-  borderRadius: `calc(${theme.shape.borderRadius}px + 8px)`,
-//   backdropFilter: 'blur(24px)',
-  border: '1px solid',
-  borderColor: theme.palette.divider,
-  backgroundColor: alpha(theme.palette.background.default, 0.4),
-  boxShadow: theme.shadows[1],
-  padding: '8px 12px',
+const pages = ['Home', 'Results'];
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
 }));
 
-export default function AppAppBar() {
-  const [open, setOpen] = React.useState(false);
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  width: '100%',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
+
+export default function NavBar() {
+  const { VITE_TMDB_API_TOKEN } = process.env;
+  const navigate = useNavigate(); // Use the navigate hook
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
+  const handleSearchSubmit = (event) => {
+    if (event.key === 'Enter') {
+      const currentSearchTerm = searchTerm; // Store the current value
+      setSearchTerm(""); // Reset searchTerm
 
-//   <Router>
-//   <div className='App'>
-//     <div className="container">
-//       <ul>
-//         <li><Link to="/home">Home</Link></li>
-//         <li><Link to="/about">About</Link></li>
-//         <li><Link to="/contact">Contact</Link></li>
-//       </ul>
-//       <hr />
-//     </div>
-//     <div className="container">
-//       <Routes>
-//         <Route path="/home" element={<Home/>} />
-//         <Route path="/about" element={<About/>} />
-//         <Route path="/contact" element={<Contact/>} />
-//       </Routes>
-//     </div>
-//   </div>
-// </Router>
+      const options = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/search/movie',
+        params: { query: currentSearchTerm, include_adult: 'false', language: 'en-US', page: '1' },
+        headers: {
+          accept: 'application/json',
+          Authorization: VITE_TMDB_API_TOKEN
+        }
+      };
+
+      axios.request(options)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  };
+
+  const handlePageChange = (page) => {
+    navigate(`/${page.toLowerCase().replace(' ', '_')}`); // Navigate to the correct route
+  };
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{ boxShadow: 0, bgcolor: 'transparent', backgroundImage: 'none', mt: 10 }}
-    >
-      <Container maxWidth="lg">
-        <StyledToolbar variant="dense" disableGutters>
-            <Router>
-                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                    <Button variant="text" color="info" size="small">
-                        <Link to="/home">Home</Link>
-                    </Button>
-                    <Button variant="text" color="info" size="small">
-                        <Link to="/about">About</Link>
-                    </Button>
-                    <Button variant="text" color="info" size="small">
-                        <Link to="/contact">Contact</Link>
-                    </Button>
-                    </Box>
-                </Box> 
-                <Routes>
-                    <Route path="/home" element={<Home/>} />
-                    <Route path="/about" element={<About/>} />
-                    <Route path="/contact" element={<Contact/>} />
-                </Routes>
-            </Router>
-          <Box sx={{ display: { sm: 'flex', md: 'none' } }}>
-            <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-              <MenuIcon />
-            </IconButton>
-            <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
-              <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <IconButton onClick={toggleDrawer(false)}>
-                    <CloseRoundedIcon />
-                  </IconButton>
-                </Box>
-                <Divider sx={{ my: 3 }} />
-              </Box>
-            </Drawer>
+    <AppBar position="sticky">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
           </Box>
-        </StyledToolbar>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyDown={handleSearchSubmit}
+            />
+          </Search>
+        </Toolbar>
       </Container>
     </AppBar>
   );
