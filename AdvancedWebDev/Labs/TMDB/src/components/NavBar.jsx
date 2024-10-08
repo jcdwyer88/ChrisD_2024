@@ -10,7 +10,10 @@ import Button from '@mui/material/Button';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { Results } from './Results';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
+import MovieCard from './MovieCard';
 
 const pages = ['Home', 'Results'];
 
@@ -57,35 +60,41 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const { VITE_TMDB_API_TOKEN } = process.env;
-  const navigate = useNavigate(); // Use the navigate hook
+  const navigate = useNavigate(); 
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [movies, setMovies] = useState([]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = async (event) => {
     if (event.key === 'Enter') {
       const currentSearchTerm = searchTerm; // Store the current value
       setSearchTerm(""); // Reset searchTerm
 
-      const options = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/search/movie',
-        params: { query: currentSearchTerm, include_adult: 'false', language: 'en-US', page: '1' },
-        headers: {
-          accept: 'application/json',
-          Authorization: VITE_TMDB_API_TOKEN
-        }
-      };
+      useEffect(() => {
+        const fetchMovies = async () => {
+          try {
+              const options = {
+                  method: 'GET',
+                  url: 'https://api.themoviedb.org/3/search/movie',
+                  params: { query: currentSearchTerm, include_adult: 'false', language: 'en-US', page: '1' },
+                  headers: {
+                      accept: 'application/json',
+                      Authorization: `Bearer ${VITE_TMDB_API_TOKEN}`,
+                  },
+              };
 
-      axios.request(options)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+              const response = await axios.request(options);
+              console.log(response);
+              setMovies(response.data.results); // Store the array of movies directly
+          } catch (err) {
+              console.error(err);
+          }
+      };
+      fetchMovies();
+      }, [VITE_TMDB_API_TOKEN]);
     }
   };
 
@@ -94,51 +103,58 @@ export default function NavBar() {
   };
 
   return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              value={searchTerm}
-              onChange={handleSearchChange}
-              onKeyDown={handleSearchSubmit}
-            />
-          </Search>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <>
+          <AppBar position="sticky">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Box>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                value={searchTerm}
+                onChange={handleSearchChange}
+                onKeyDown={handleSearchSubmit}
+              />
+            </Search>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      {movies.map((movie) => (
+          <MovieCard key={movie.id} newMovie={movie} />
+      ))}
+    </>
+
   );
 }
+
