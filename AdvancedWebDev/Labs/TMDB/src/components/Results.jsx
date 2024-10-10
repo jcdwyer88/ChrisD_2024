@@ -1,40 +1,68 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import MovieCard from './MovieCard';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "./Card";
+import { useLocation } from "react-router-dom";
 
-export const Results = () => {
+const Results = () => {
     const { VITE_TMDB_API_TOKEN } = process.env;
+    const location = useLocation();
+    const searchTerm = location.state?.searchTerm || ""; // Access the search term from location state
     const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true); // Loading state
 
-    useEffect(() => {
-        const fetchMovies = async () => {
-            try {
-                const options = {
-                    method: 'GET',
-                    url: 'https://api.themoviedb.org/3/movie/now_playing',
-                    params: { language: 'en-US', page: '1' },
-                    headers: {
-                        accept: 'application/json',
-                        Authorization: `Bearer ${VITE_TMDB_API_TOKEN}`,
-                    },
-                };
+  useEffect(() => {
+    const fetchMovies = async () => {
+    setLoading(true); // Start loading
+      try {
+        const response = searchTerm === ""
+          ? await axios.get(
+              `https://api.themoviedb.org/3/movie/now_playing`,
+              {
+                params: {
+                  api_key: VITE_TMDB_API_TOKEN,
+                  language: "en-US",
+                  page: 1,
+                },
+              }
+            )
+          : await axios.get(
+              `https://api.themoviedb.org/3/search/movie`,
+              {
+                params: {
+                  query: searchTerm,
+                  api_key: VITE_TMDB_API_TOKEN,
+                  include_adult: "false",
+                  language: "en-US",
+                  page: 1,
+                },
+              }
+            );
 
-                const response = await axios.request(options);
-                console.log(response);
-                setMovies(response.data.results); // Store the array of movies directly
-            } catch (err) {
-                console.error(err);
-            }
-        };
+        setMovies(response.data.results);
+        // setError(null);
+      } catch (err) {
+        setError("Failed to fetch movies. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        fetchMovies();
-    }, [VITE_TMDB_API_TOKEN]); // Adding the token as a dependency if it might change
+    fetchMovies();
+  }, [searchTerm, VITE_TMDB_API_TOKEN]); // Dependency array includes searchTerm
 
-    return (
-        <>
-            {movies.map((movie) => (
-                <MovieCard key={movie.id} newMovie={movie} />
-            ))}
-        </>
-    );
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div>
+      {movies.length > 0 ? (
+        movies.map((movie) => <Card key={movie.id} movie={movie} />)
+      ) : (
+        <div>No movies found.</div>
+      )}
+    </div>
+  );
 };
+
+export default Results;
