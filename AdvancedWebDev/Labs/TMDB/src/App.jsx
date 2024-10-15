@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Results from "./components/Results";
 import ErrorPage from "./components/Error";
@@ -16,12 +16,10 @@ const App = () => {
           <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route
-              path="/results"
-              element={<Results searchTerm={searchTerm} />}
-            />
+            <Route path="/results" element={<Results searchTerm={searchTerm} />} />
             <Route path="/error" element={<ErrorPage />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Router>
       </Theme>

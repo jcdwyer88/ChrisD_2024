@@ -9,23 +9,19 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-image: url("./assets/theater.jpeg");
-  background-size: cover;
-  color: white;
+  background-size: 100;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: rgb(102, 5, 5);
 }
 
 h1, h2, h3 {
-  color: white; /* Example for styling headings */
+  color: white;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #1976d2; /* Your primary color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
 
 button:hover {
-  background-color: #155a8a; /* Darker shade on hover */
+  background-color: hsla(188, 73%, 61%, 0.5);
 }

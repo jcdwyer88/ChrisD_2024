@@ -3,8 +3,8 @@ import React from 'react';
 const ErrorPage = () => {
   return (
     <div>
-      <h1>Oops! Something went wrong.</h1>
-      <p>Please try again later.</p>
+      <h1>Oops! Something went wrong</h1>
+      <h2>Please try another movie name</h2>
     </div>
   );
 };

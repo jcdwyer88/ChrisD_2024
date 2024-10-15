@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 const Results = () => {
-    const token = process.env.REACT_APP_VITE_TMDB_TOKEN;
+    const token = process.env.VITE_TMDB_KEY;
     const location = useLocation();
-    const searchTerm = location.state?.searchTerm || ""; // Access the search term from location state
+    const searchTerm = location.state?.searchTerm || ""; 
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
+    
 
   useEffect(() => {
     const fetchMovies = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
       try {
+        if (!token) {
+          setError("API token is missing. Please check your configuration.");
+          return;
+        }
         const response = searchTerm === ""
           ? await axios.get(
               `https://api.themoviedb.org/3/movie/now_playing`,
@@ -40,8 +45,8 @@ const Results = () => {
             );
 
         setMovies(response.data.results);
-        // setError(null);
       } catch (err) {
+        console.log(err);
         setError("Failed to fetch movies. Please try again later.");
       } finally {
         setLoading(false);
@@ -59,7 +64,7 @@ const Results = () => {
       {movies.length > 0 ? (
         movies.map((movie) => <Card key={movie.id} movie={movie} />)
       ) : (
-        <div>No movies found.</div>
+        <Navigate to="/error" />
       )}
     </div>
   );
