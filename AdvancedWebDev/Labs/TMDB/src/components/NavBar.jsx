@@ -9,19 +9,19 @@ import {
   Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useTheme } from '@mui/material/styles'; // Import useTheme
+import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
+  zIndex: "theme.zIndex.drawer + 1",
 }));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
+  backgroundColor: alpha(theme.palette.text.primary, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    backgroundColor: alpha(theme.palette.text.secondary, 0.25),
   },
   marginLeft: 0,
   width: "100%",
@@ -47,21 +47,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     width: "100%",
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
   },
 }));
 
 function NavBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const theme = useTheme(); // Access the theme
-
+  const theme = useTheme();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -70,22 +62,36 @@ function NavBar() {
   const handleSearchSubmit = (event) => {
     if (event.key === "Enter") {
       const currentSearchTerm = event.target.value;
-      setSearchTerm(""); 
+      setSearchTerm("");
       navigate("/results", { state: { searchTerm: currentSearchTerm } });
     }
   };
 
-
   return (
-    <StyledAppBar position="sticky">
+    <StyledAppBar
+      position="sticky"
+      sx={{ borderRadius: "10px", boxShadow: "0px 4px 10px #000000" }}
+    >
       <Toolbar>
-        <Typography variant="h6" edge="start" sx={{ marginInlineEnd: 5, color: theme.palette.text.primary}}>
+        <Typography
+          variant="h6"
+          edge="start"
+          sx={{ marginInlineEnd: 5, color: theme.palette.text.primary, fontFamily: "fantasy" }}
+        >
           TMDB
         </Typography>
-        <Button color="inherit" onClick={() => navigate("/home")} aria-label="Go to Home">
+        <Button
+          color="inherit"
+          onClick={() => navigate("/home")}
+          aria-label="Go to Home"
+        >
           Home
         </Button>
-        <Button color="inherit" onClick={() => navigate("/results")} aria-label="View Now Playing">
+        <Button
+          color="inherit"
+          onClick={() => navigate("/results")}
+          aria-label="View Now Playing"
+        >
           Now Playing
         </Button>
         <div style={{ flexGrow: 1 }} />
@@ -107,4 +113,3 @@ function NavBar() {
 }
 
 export default NavBar;
-

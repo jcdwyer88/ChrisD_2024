@@ -10,6 +10,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
+import "./ui/App.css";
 
 const Card = ({ movie }) => {
   const [imgError, setImgError] = useState(false);
@@ -30,7 +31,7 @@ const Card = ({ movie }) => {
 
   const posterUrl =
     imgError || !movie.poster_path
-      ? "./src/assets/defaultPoster.jpg"
+      ? "./src/assets/flaming_pumpkin.gif"
       : `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
   const formattedRating = movie.vote_average
@@ -40,31 +41,21 @@ const Card = ({ movie }) => {
   return (
     <MuiCard
       variant="outlined"
+      className="muiCard"
       sx={{
-        backgroundColor: "darkgrey",
-        margin: "5px",
-        width: "20vw",
-        height: "60vh",
-        borderRadius: "16px",
-        opacity: "90%",
-        display: "inline-block",
         overflow: showOverview ? "scroll" : "hidden",
-        alignItems: "center",
-        transition: "transform 0.3s",
         "&:hover": {
-          transform: "scale(1.05)",
+          transform: "scale(1.02)",
+          backgroundColor: "#666666",
+          boxShadow: "4px 4px 10px #ffffff",
+          borderColor: "#800000",
+          borderWidth: "3px",
         },
       }}
     >
       <CardMedia
         component="img"
-        sx={{
-          width: "80%",
-          height: "65%",
-          margin: "auto",
-          objectFit: "contain",
-          mt: "10px",
-        }}
+        className="muiCardMedia"
         image={posterUrl}
         alt={movie.title}
         title={movie.title}

@@ -8,10 +8,10 @@ import {
 import NavBar from "./components/NavBar";
 import Results from "./components/Results";
 import ErrorPage from "./components/Error";
-import Theme from "./components/Theme";
+import Theme from "./components/ui/Theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Home from "./components/Home"; // Ensure you have this component
-import "./App.css";
+import "./components/ui/App.css";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");

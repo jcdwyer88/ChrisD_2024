@@ -4,36 +4,34 @@ import Card from "./Card";
 import { useLocation, Navigate } from "react-router-dom";
 
 const Results = () => {
-    const token = process.env.VITE_TMDB_KEY;
-    const location = useLocation();
-    const searchTerm = location.state?.searchTerm || ""; 
-    const [movies, setMovies] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-    
+  const token = process.env.VITE_TMDB_API_KEY;
+  const location = useLocation();
+  const searchTerm = location.state?.searchTerm || "";
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
-    setLoading(true); 
+      setLoading(true);
       try {
         if (!token) {
           setError("API token is missing. Please check your configuration.");
           return;
         }
-        const response = searchTerm === ""
-          ? await axios.get(
-              `https://api.themoviedb.org/3/movie/now_playing`,
-              {
-                params: {
-                  api_key: token,
-                  language: "en-US",
-                  page: 1,
-                },
-              }
-            )
-          : await axios.get(
-              `https://api.themoviedb.org/3/search/movie`,
-              {
+        const response =
+          searchTerm === ""
+            ? await axios.get(
+                `https://api.themoviedb.org/3/movie/now_playing`,
+                {
+                  params: {
+                    api_key: token,
+                    language: "en-US",
+                    page: 1,
+                  },
+                }
+              )
+            : await axios.get(`https://api.themoviedb.org/3/search/movie`, {
                 params: {
                   query: searchTerm,
                   api_key: token,
@@ -41,22 +39,21 @@ const Results = () => {
                   language: "en-US",
                   page: 1,
                 },
-              }
-            );
+              });
 
         setMovies(response.data.results);
       } catch (err) {
         console.log(err);
-        setError("Failed to fetch movies. Please try again later.");
+        setError("Authentication failed, failed to fetch movies. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchMovies();
-  }, [searchTerm, token]); // Dependency array includes searchTerm
+  }, [searchTerm, token]);
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
