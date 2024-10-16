@@ -9,6 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useTheme } from '@mui/material/styles'; // Import useTheme
 import { useNavigate } from "react-router-dom";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -18,9 +19,9 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginLeft: 0,
   width: "100%",
@@ -59,6 +60,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function NavBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const theme = useTheme(); // Access the theme
+
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -76,7 +79,7 @@ function NavBar() {
   return (
     <StyledAppBar position="sticky">
       <Toolbar>
-        <Typography variant="h6" edge="start" sx={{ marginInlineEnd: 5 }}>
+        <Typography variant="h6" edge="start" sx={{ marginInlineEnd: 5, color: theme.palette.text.primary}}>
           TMDB
         </Typography>
         <Button color="inherit" onClick={() => navigate("/home")} aria-label="Go to Home">
