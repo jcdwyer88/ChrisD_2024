@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  postgres-db:
+    container_name: tar4g
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: tar_dev
+      POSTGRES_PASSWORD: tar_dev12
+      POSTGRES_DB: tar4g
+      POSTGRES_HOST_AUTH_METHOD: password
+    ports:
+      - "5440:5432"
+volumes:
+  postgresql_data:
+    driver: local

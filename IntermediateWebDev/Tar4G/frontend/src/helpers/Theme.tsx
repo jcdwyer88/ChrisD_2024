@@ -10,7 +10,8 @@ const darkTheme = createTheme({
         },
     },
 });
-const Theme = ({ children }) => {
+// @ts-ignore
+const Theme = ({children}) => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />

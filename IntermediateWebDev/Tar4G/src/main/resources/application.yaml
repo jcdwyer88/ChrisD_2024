@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Tar4G
+
+  datasource:
+    url: jdbc:postgresql://localhost:5440/tar4g
+    driver-class-name: org.postgresql.Driver
+    username: tar_dev
+    password: tar_dev12
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 8080

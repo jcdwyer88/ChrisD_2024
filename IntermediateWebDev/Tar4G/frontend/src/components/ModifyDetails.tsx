@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {createResource, getResourceById} from "../Client.ts"
+import {createResource, getResourceById, updateResource} from "../Client.ts"
 import {Box, Button, Container, TextField, Typography} from "@mui/material";
 
 export const ModifyDetails = () => {
@@ -8,26 +8,36 @@ export const ModifyDetails = () => {
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('');
     const [keywords, setKeywords] = useState('');
-    const navigator = useNavigate();
+    const navigate = useNavigate();
+    const {id} = useParams();
 
-    const handleSubmit = (e) => {
+    // @ts-ignore
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newResource = {name, description, url, keywords};
 
-        createResource(newResource)
-            .then((response) => {
-                console.log(response.data);
-                navigator("/resources")
+        if (id) {
+            await updateResource(newResource, id)
+                .then((res) => {
+                    console.log(res.data)
+                }).catch((err) => {
+                    console.log(err)
             })
-            .catch((error) => {
-                console.error(error);
-            })
+        } else {
+            await createResource(newResource)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+        }
+        navigate("/api/resources/")
     }
 
-    const {id} = useParams();
     useEffect(() => {
-        if(id) {
+        if (id) {
             getResourceById(id).then((response) => {
                 setName(response.data.name)
                 setDescription(response.data.description)
@@ -73,7 +83,7 @@ export const ModifyDetails = () => {
                     required
                 />
 
-                <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+                <Button type="submit" variant="contained" color="primary" sx={{mt: 2}} onClick={handleSubmit}>
                     Submit</Button>
             </Box>
         </Container>

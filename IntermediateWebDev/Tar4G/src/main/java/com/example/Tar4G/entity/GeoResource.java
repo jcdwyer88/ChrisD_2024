@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Entity
 @Table(name="geo_resource")
-public class geo_resource {
+public class GeoResource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

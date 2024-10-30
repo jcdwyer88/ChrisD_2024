@@ -1,22 +1,34 @@
 import {
-    Box,
     Button,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography
+    Paper
 } from "@mui/material";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import {useEffect, useState} from "react";
 import {deleteResource, getAllTasks} from "../Client.ts";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import axios from 'axios';
 
 export const List = () => {
-    // Example mock data for Task array
-    const resources = [
+
+    const columns: GridColDef[] = [
+        { field: 'id', headerName: 'ID', flex: 0 },
+        { field: 'name', headerName: 'Name', flex: 2 },
+        { field: 'url', headerName: 'URL', flex: 2 },
+        { field: 'description', headerName: 'Description', flex: 3 },
+        { field: 'keywords', headerName: 'Keywords', flex: 2 },
+        { field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
+            <div>
+                <Button variant="outlined" onClick={() => {viewDetails(params.row.id)}}>
+                    Edit
+                </Button>
+                <Button variant="outlined" color="error" onClick={() => {removeResource(params.row.id)}}>
+                    Delete
+                </Button>
+            </div>
+            )},
+    ];
+
+    const rows = [
         {
             id: 1,
             name: "resource 1",
@@ -38,79 +50,89 @@ export const List = () => {
             url: "resource3.com",
             keywords: "resource3 keyword3"
         },
-    ];
+    ]
 
-    const [resource, setResource] = useState([]);
+    const paginationModel = { page: 0, pageSize: 10 };
+
+    const navigate = useNavigate();
+    const [resources, setResources] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     const listAllResources = async () => {
-        getAllTasks()
-            .then((response) => {
-                setResource(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
+        setLoading(true);
+        setError('');
+        try {
+            const response = await axios.get("/api/resources"); // Fetch from your API
+            setResources(response.data); // Update state with the fetched data
+        } catch (error) {
+            setError("Failed to load resources.");
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+        };
+
+        // getAllTasks()
+        //     .then((response) => {
+        //         setResources(response.data);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+        // };
 
     useEffect(() => {
         listAllResources();
     }, [])
 
-    const removeResource = (id) => {
-        deleteResource(id)
-            .then(() => {
-                listAllResources();
-        })
-        .catch((error) => {
+    const removeResource = async (id) => {
+        try {
+            await axios.delete(`/api/resources/${id}`); // Call your delete endpoint
+            listAllResources(); // Refresh the list after deletion
+        } catch (error) {
+            setError("Failed to delete resource.");
             console.error(error);
-        });
+        }
     };
 
+    //     deleteResource(id)
+    //         .then(() => {
+    //             listAllResources();
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
+    // };
+
+    // @ts-ignore
     const viewDetails = (id) => {
-        navigator(`/edit-resource/${id}`)
+        console.log(id)
+        navigate(`/edit-resource/${id}`)
     }
 
     return (
-        <div>
-            <Box>
-                {/* Title and Button Box */}
-                <Box>
-                    <Typography variant="h4" className="title">
-                        Geospatial Tools and Resources
-                    </Typography>
-                </Box>
 
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>URL</TableCell>
-                                <TableCell>Keywords</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {resources.map((resource) => (
-                                <TableRow key={resource.id} className="table-row">
-                                    <TableCell>{resource.name}</TableCell>
-                                    <TableCell>{resource.description}</TableCell>
-                                    <TableCell>{resource.url}</TableCell>
-                                    <TableCell>{resource.keywords}</TableCell>
-                                    <TableCell>
-                                        <Button onClick={() => viewDetails(resource.id)}>Edit</Button>
-                                        <Button onClick={() => {removeResource(resource.id)}}>Delete</Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Box>
-            <Button component={NavLink} to="/add-resource" color="inherit" sx={{
-                textTransform: 'none'
-            }}> Add Resource </Button>
-        </div>
+        <Paper elevation={18} sx={{ height: 400, width: '100vw', pt: 4}}>
+            {loading ? (
+                <CircularProgress />
+            ) : error ? (
+                <Alert severity="error">{error}</Alert>
+            ) : (
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{ pagination: { paginationModel } }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+                sx={{ border: 0 }}
+            />
+                )}
+                 <Button component={NavLink} to="/add-resource" color="inherit" sx={{
+                     textTransform: 'none'
+                 }}> Add Resource </Button>
+        </Paper>
+
     );
 };
 
