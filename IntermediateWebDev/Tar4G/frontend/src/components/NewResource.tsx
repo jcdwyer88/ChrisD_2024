@@ -1,56 +1,33 @@
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {createResource, getResourceById, updateResource} from "../Client.ts"
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {createResource} from "../Client.ts"
 import {Box, Button, Container, TextField, Typography} from "@mui/material";
 
-export const ModifyDetails = () => {
+export const NewResource = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('');
     const [keywords, setKeywords] = useState('');
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
 
-    const resourceId = id ? parseInt(id, 10) : undefined;
     // @ts-ignore
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newResource = {name, description, url, keywords};
+
         try {
-            if (resourceId) {
-                await updateResource(resourceId, newResource);
-                console.log('Resource update: ', newResource);
-            } else {
-                await createResource(newResource);
-                console.log('Resource created: ', newResource)
-            }
+            await createResource(newResource);
+            console.log('Resource created: ', newResource);
             navigate("/api/resources/");
         } catch (error) {
             console.error('Error saving resource: ', error);
         }
     };
 
-    useEffect(() => {
-        const fetchResource = async () => {
-            if (resourceId) {
-                try {
-                    const response = await getResourceById(resourceId);
-                    setName(response.name)
-                    setDescription(response.description)
-                    setUrl(response.url)
-                    setKeywords(response.keywords)
-                } catch (error) {
-                    console.error('Error fetching resource: ', error)
-                }
-            }
-        };
-        fetchResource();
-    }, [resourceId]);
-
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>{resourceId ? "Modify Resourse" : "Create Resource"}</Typography>
+            <Typography variant="h4" gutterBottom>Create New Resource</Typography>
 
             <Box component="form" onSubmit={handleSubmit} sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
                 <TextField

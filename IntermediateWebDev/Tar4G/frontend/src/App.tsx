@@ -4,6 +4,7 @@ import {Header} from "./components/Header.tsx";
 import {Home} from './components/Home.tsx';
 import {List} from "./components/List.tsx";
 import {ModifyDetails} from "./components/ModifyDetails.tsx";
+import {NewResource} from "./components/NewResource.tsx"
 
 export const App = () => {
 
@@ -13,8 +14,8 @@ export const App = () => {
             <Routes>
                 <Route path='/' element={<Home/>}/>
                 <Route path='/resources' element={<List/>}/>
-                <Route path='/add-resource' element={<ModifyDetails/>}/>
-                <Route path='/edit-resouce/:id' element={<ModifyDetails/>}/>
+                <Route path='/add-resource' element={<NewResource />}/>
+                <Route path='/edit-resouce/:id' element={<ModifyDetails />}/>
             </Routes>
         </BrowserRouter>
 

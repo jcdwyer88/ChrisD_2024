@@ -1,64 +1,51 @@
 import {
     Alert,
-    Button, CircularProgress,
+    Button, CircularProgress, Grid2, IconButton,
     Paper
 } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import {useEffect, useState} from "react";
-// import {deleteResource, getAllTasks} from "../Client.ts";
+import React, {useEffect, useState} from "react";
+import {deleteResource, updateResource, fetchResources, Resource} from "../Client.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from 'axios';
+import {DeleteOutline, EditOutlined} from "@mui/icons-material";
 
 export const List = () => {
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', flex: 0 },
         { field: 'name', headerName: 'Name', flex: 2 },
-        { field: 'url', headerName: 'URL', flex: 2 },
         { field: 'description', headerName: 'Description', flex: 3 },
+        { field: 'url', headerName: 'URL', flex: 2 },
         { field: 'keywords', headerName: 'Keywords', flex: 2 },
         { field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
             <div>
-                <Button variant="outlined" onClick={() => {viewDetails(params.row.id)}}>
-                    Edit
-                </Button>
-                <Button variant="outlined" color="error" onClick={() => {removeResource(params.row.id)}}>
-                    Delete
-                </Button>
+                <IconButton
+                    onClick={() => viewDetails(params.row.id)}
+                    color="warning"
+                    edge="end"
+                    aria-label="edit-button">
+                    <EditOutlined />
+                </IconButton>
+                <IconButton
+                    onClick={() => {
+                        removeResource(params.row.id).then(listAllResources)
+                    }}
+                    color="error"
+                    edge="end"
+                    aria-label="delete-button">
+                    <DeleteOutline/>
+                </IconButton>
             </div>
             )},
     ];
 
-    const rows = [
-        {
-            id: 1,
-            name: "resource 1",
-            description: "Set up project structure 1",
-            url: "resource1.com",
-            keywords: "resource1 keyword1"
-        },
-        {
-            id: 2,
-            name: "resource 2",
-            description: "Set up project structure 2",
-            url: "resource2.com",
-            keywords: "resource2 keyword2"
-        },
-        {
-            id: 3,
-            name: "resource 3",
-            description: "Set up project structure 3",
-            url: "resource3.com",
-            keywords: "resource3 keyword3"
-        },
-    ]
-
-    const paginationModel = { page: 0, pageSize: 10 };
-
-    const navigate = useNavigate();
     const [resources, setResources] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+
+    const navigate = useNavigate();
+    const paginationModel = { page: 0, pageSize: 10 };
 
     const listAllResources = async () => {
         setLoading(true);
@@ -74,15 +61,6 @@ export const List = () => {
         }
         };
 
-        // getAllTasks()
-        //     .then((response) => {
-        //         setResources(response.data);
-        //     })
-        //     .catch((error) => {
-        //         console.error(error);
-        //     });
-        // };
-
     useEffect(() => {
         listAllResources();
     }, [])
@@ -97,19 +75,8 @@ export const List = () => {
         }
     };
 
-    //     deleteResource(id)
-    //         .then(() => {
-    //             listAllResources();
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
-    // };
-
-    // @ts-ignore
-    const viewDetails = (id) => {
-        console.log(id)
-        navigate(`/edit-resource/${id}`)
+    const viewDetails = (id: number) => {
+        navigate(`/api/resources/${id}`)
     }
 
     return (
@@ -121,11 +88,10 @@ export const List = () => {
                 <Alert severity="error">{error}</Alert>
             ) : (
             <DataGrid
-                rows={rows}
+                rows={resources}
                 columns={columns}
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
                 sx={{ border: 0 }}
             />
                 )}
