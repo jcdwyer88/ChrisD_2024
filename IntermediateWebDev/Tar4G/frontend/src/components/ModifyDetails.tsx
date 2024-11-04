@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {createResource, getResourceById, updateResource} from "../Client.ts"
+import {createResource, getResourceById, updateResource} from "../helpers/Client.ts"
 import {Box, Button, Container, TextField, Typography} from "@mui/material";
 
 export const ModifyDetails = () => {

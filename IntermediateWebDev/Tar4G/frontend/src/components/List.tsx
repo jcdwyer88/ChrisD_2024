@@ -1,14 +1,17 @@
 import {
     Alert,
-    Button, CircularProgress, Grid2, IconButton,
+    Button,
+    CircularProgress,
+    IconButton,
     Paper
 } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import React, {useEffect, useState} from "react";
-import {deleteResource, updateResource, fetchResources, Resource} from "../Client.ts";
+import {useEffect, useState} from "react";
+// import {deleteResource, updateResource, fetchResources, Resource} from "../helpers/Client.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {DeleteOutline, EditOutlined} from "@mui/icons-material";
+import {getResourceById} from "../helpers/Client.ts";
 
 export const List = () => {
 
@@ -75,7 +78,15 @@ export const List = () => {
         }
     };
 
-    const viewDetails = (id: number) => {
+    const viewDetails = async (id: any) => {
+        try {
+            // const response = await axios.get(`/api/resources/${id}`);
+            const response = await getResourceById(id);
+            const resource = setResources(response.name, response.description, response.url, response.keywords);
+            console.log(resource);
+        } catch (error) {
+            console.error(error);
+        }
         navigate(`/api/resources/${id}`)
     }
 

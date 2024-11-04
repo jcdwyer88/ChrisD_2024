@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {createResource} from "../Client.ts"
+import {createResource} from "../helpers/Client.ts"
 import {Box, Button, Container, TextField, Typography} from "@mui/material";
 
 export const NewResource = () => {

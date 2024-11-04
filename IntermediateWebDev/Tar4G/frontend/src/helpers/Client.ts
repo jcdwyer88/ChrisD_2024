@@ -1,20 +1,7 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
+import { CreateResource, FetchResources, GetResourceById, UpdateResource, DeleteResource } from "../types.ts"
 
 const BASE_URL = 'http://localhost:8080/api/resources'
-
-export type Resource = {
-    id?: number,
-    name: string,
-    description: string,
-    url: string,
-    keywords: string
-}
-
-type CreateResource = (newResource: Resource) => Promise<Resource>;
-type FetchResources = () => Promise<Resource[]>;
-type GetResourceById = (id: number) => Promise<Resource>;
-type DeleteResource = (id: number) => Promise<void>;
-type UpdateResource = (id: number, updatedResource: Resource) => Promise<Resource>;
 
 export const fetchResources: FetchResources = async () => {
     const response = await axios.get(BASE_URL);
