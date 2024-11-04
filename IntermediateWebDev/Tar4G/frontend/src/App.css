@@ -3,10 +3,10 @@
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     background-position: top;
-    background-color: transparent;
+    /*background-color: transparent;*/
 }
 
 .flex-box {
     opacity: 50;
-    background-color: transparent !important;
+    /*background-color: transparent !important;*/
 }

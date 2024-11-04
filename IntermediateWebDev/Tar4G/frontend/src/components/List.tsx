@@ -1,10 +1,11 @@
 import {
-    Button,
+    Alert,
+    Button, CircularProgress,
     Paper
 } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import {useEffect, useState} from "react";
-import {deleteResource, getAllTasks} from "../Client.ts";
+// import {deleteResource, getAllTasks} from "../Client.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from 'axios';
 
@@ -63,8 +64,8 @@ export const List = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await axios.get("/api/resources"); // Fetch from your API
-            setResources(response.data); // Update state with the fetched data
+            const response = await axios.get("/api/resources");
+            setResources(response.data);
         } catch (error) {
             setError("Failed to load resources.");
             console.error(error);
@@ -86,7 +87,7 @@ export const List = () => {
         listAllResources();
     }, [])
 
-    const removeResource = async (id) => {
+    const removeResource = async (id: any) => {
         try {
             await axios.delete(`/api/resources/${id}`); // Call your delete endpoint
             listAllResources(); // Refresh the list after deletion
@@ -113,7 +114,7 @@ export const List = () => {
 
     return (
 
-        <Paper elevation={18} sx={{ height: 400, width: '100vw', pt: 4}}>
+        <Paper elevation={18} sx={{ backgroundColor: 'transparent', height: 400, width: '100vw', pt: 4}}>
             {loading ? (
                 <CircularProgress />
             ) : error ? (

@@ -8,6 +8,9 @@ const darkTheme = createTheme({
         secondary: {
             main: '#3f423f',
         },
+        // background: {
+        //     backgroundColor: 'transparent',
+        // },
     },
 });
 // @ts-ignore
