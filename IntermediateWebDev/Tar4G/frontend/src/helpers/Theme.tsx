@@ -1,4 +1,6 @@
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -8,13 +10,10 @@ const darkTheme = createTheme({
         secondary: {
             main: '#3f423f',
         },
-        // background: {
-        //     backgroundColor: 'transparent',
-        // },
     },
 });
-// @ts-ignore
-const Theme = ({children}) => {
+
+const Theme = ({children}: any) => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />

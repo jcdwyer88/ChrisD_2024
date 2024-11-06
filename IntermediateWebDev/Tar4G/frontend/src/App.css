@@ -3,10 +3,13 @@
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     background-position: top;
-    /*background-color: transparent;*/
 }
 
-.flex-box {
-    opacity: 50;
-    /*background-color: transparent !important;*/
+.MuiToolbar-gutters {
+    color: white;
 }
+
+/*.form {*/
+/*    background-color: rgb(238, 232, 170, 0.7);*/
+/*    box-shadow: black 6px 6px 10px;*/
+/*}*/

@@ -1,116 +1,143 @@
 import {
-    Alert,
+    Alert, Box,
     Button,
     CircularProgress,
     IconButton,
     Paper
 } from "@mui/material";
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {useEffect, useState} from "react";
-// import {deleteResource, updateResource, fetchResources, Resource} from "../helpers/Client.ts";
 import {NavLink, useNavigate} from "react-router-dom";
-import axios from 'axios';
 import {DeleteOutline, EditOutlined} from "@mui/icons-material";
-import {getResourceById} from "../helpers/Client.ts";
+import {deleteResource, fetchResources, getResourceById} from "../helpers/Client.ts";
+import {makeStyles} from "@material-ui/styles";
+import '../App.css'
+import {Resource} from "../types.ts";
+
+const useStyles = makeStyles({
+    root: {
+        backgroundColor: 'transparent',
+        color: 'black',
+        height: '60vh',
+        width: '97vw',
+        pt: 2,
+        '& .header': {
+            backgroundColor: 'palegoldenrod',
+            color: 'black'
+        },
+    },
+});
 
 export const List = () => {
 
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', flex: 0 },
-        { field: 'name', headerName: 'Name', flex: 2 },
-        { field: 'description', headerName: 'Description', flex: 3 },
-        { field: 'url', headerName: 'URL', flex: 2 },
-        { field: 'keywords', headerName: 'Keywords', flex: 2 },
-        { field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
-            <div>
-                <IconButton
-                    onClick={() => viewDetails(params.row.id)}
-                    color="warning"
-                    edge="end"
-                    aria-label="edit-button">
-                    <EditOutlined />
-                </IconButton>
-                <IconButton
-                    onClick={() => {
-                        removeResource(params.row.id).then(listAllResources)
-                    }}
-                    color="error"
-                    edge="end"
-                    aria-label="delete-button">
-                    <DeleteOutline/>
-                </IconButton>
-            </div>
-            )},
+        {field: 'id', headerName: 'ID', headerClassName: 'header', flex: 0},
+        {field: 'name', headerName: 'Name', headerClassName: 'header', flex: 2},
+        {field: 'description', headerName: 'Description', headerClassName: 'header', flex: 3},
+        {field: 'url', headerName: 'URL', headerClassName: 'header', flex: 2},
+        {field: 'keywords', headerName: 'Keywords', headerClassName: 'header', flex: 2},
+        {
+            field: 'actions', headerName: 'Actions', headerClassName: 'header', flex: 1, renderCell: (params) => (
+                <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                    <IconButton
+                        onClick={() => updateResource(params.row.id)}
+                        color="warning"
+                        edge="end"
+                        aria-label="edit-button">
+                        <EditOutlined/>
+                    </IconButton>
+                    <IconButton
+                        onClick={() => removeResource(params.row.id).then(fetchResources)}
+                        color="error"
+                        edge="end"
+                        aria-label="delete-button">
+                        <DeleteOutline/>
+                    </IconButton>
+                </Box>
+            )
+        },
     ];
 
-    const [resources, setResources] = useState([]);
+    const classes = useStyles();
+    const [resources, setResources] = useState<Resource[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const [err, setErr] = useState('');
+
 
     const navigate = useNavigate();
-    const paginationModel = { page: 0, pageSize: 10 };
+    const paginationModel = {page: 0, pageSize: 10};
 
-    const listAllResources = async () => {
+
+    const listResources = async () => {
         setLoading(true);
-        setError('');
+        setErr('');
         try {
-            const response = await axios.get("/api/resources");
-            setResources(response.data);
+            const data = await fetchResources();
+            setResources(data);
         } catch (error) {
-            setError("Failed to load resources.");
+            setErr("Failed to load resources.");
             console.error(error);
         } finally {
             setLoading(false);
         }
-        };
+    };
 
     useEffect(() => {
-        listAllResources();
+        listResources();
     }, [])
 
-    const removeResource = async (id: any) => {
-        try {
-            await axios.delete(`/api/resources/${id}`); // Call your delete endpoint
-            listAllResources(); // Refresh the list after deletion
-        } catch (error) {
-            setError("Failed to delete resource.");
-            console.error(error);
+    const removeResource = async (id: number) => {
+        if (window.confirm("Are you sure you want to delete this resource?")) {
+            try {
+                await deleteResource(id);
+                await listResources();
+            } catch (error) {
+                setErr("Failed to delete resource.");
+            }
         }
     };
 
-    const viewDetails = async (id: any) => {
+    const updateResource =  (id: number) => {
         try {
-            // const response = await axios.get(`/api/resources/${id}`);
-            const response = await getResourceById(id);
-            const resource = setResources(response.name, response.description, response.url, response.keywords);
-            console.log(resource);
+            const response = getResourceById(id);
+            console.log(response);
+            navigate(`/edit-resource/${id}`);
         } catch (error) {
             console.error(error);
         }
-        navigate(`/api/resources/${id}`)
     }
 
     return (
-
-        <Paper elevation={18} sx={{ backgroundColor: 'transparent', height: 400, width: '100vw', pt: 4}}>
-            {loading ? (
-                <CircularProgress />
-            ) : error ? (
-                <Alert severity="error">{error}</Alert>
-            ) : (
-            <DataGrid
-                rows={resources}
-                columns={columns}
-                initialState={{ pagination: { paginationModel } }}
-                pageSizeOptions={[5, 10]}
-                sx={{ border: 0 }}
-            />
+        <Box sx={{display: 'flex', width: '100vw', margin: 'auto', justifyContent: 'center'}}>
+            <Paper elevation={12} className={classes.root}>
+                {loading ? (
+                    <CircularProgress/>
+                ) : err ? (
+                    <Alert severity="error">{err}</Alert>
+                ) : (
+                    <DataGrid
+                        rows={resources}
+                        columns={columns}
+                        initialState={{pagination: {paginationModel}}}
+                        pageSizeOptions={[10, 20]}
+                        disableRowSelectionOnClick
+                        sx={{backgroundColor: 'rgb(0, 0, 0, 0.5)', color: 'white', border: 'transparent', borderRadius: 2}}
+                    />
                 )}
-                 <Button component={NavLink} to="/add-resource" color="inherit" sx={{
-                     textTransform: 'none'
-                 }}> Add Resource </Button>
-        </Paper>
-
+                <Button variant='contained' component={NavLink} to="/add-resource" sx={{
+                    backgroundColor: 'palegoldenrod',
+                    fontWeight: 700,
+                    color: 'black',
+                    marginTop: 2,
+                    '&:hover': {
+                        fontStyle: 'italic',
+                        color: 'darkgoldenrod',
+                        transform: 'scale(1.05)',
+                        transition: 'transform 0.5s ease',
+                    }
+                }}> Add Resource </Button>
+            </Paper>
+        </Box>
     );
 };
 

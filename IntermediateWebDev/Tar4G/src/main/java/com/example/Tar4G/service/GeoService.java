@@ -31,7 +31,6 @@ public class GeoService {
 
     public GeoResource updateResource(GeoResource updatedResource, Long id) {
         GeoResource geoResource = geoRepository.findById(id).orElse(null);
-        assert geoResource != null;
         geoResource.setName(updatedResource.getName());
         geoResource.setDescription(updatedResource.getDescription());
         geoResource.setUrl(updatedResource.getUrl());

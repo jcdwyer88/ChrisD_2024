@@ -20,7 +20,7 @@ export const createResource: CreateResource = async (data) => {
 
 export const deleteResource: DeleteResource = async (id: number) => {
     try{
-        await axios.delete(`${BASE_URL}/${id})`);
+        await axios.delete(`/api/resources/${id}`);
     } catch (error) {
         console.error('Error deleting resource: ', error);
         throw error;
@@ -28,14 +28,18 @@ export const deleteResource: DeleteResource = async (id: number) => {
 }
 
 export const getResourceById: GetResourceById = async (id) => {
-    const response = await axios.get(`${BASE_URL}/${id})`);
-    return response.data;
+    try{
+        const response = await axios.get(`${BASE_URL}/${id}`);
+        return response.data;
+    } catch (err: any) {
+        throw new Error(`Failed to fetch resource with id ${id}: ${err.message}`);
+    }
+
 }
 
-// @ts-ignore
 export const updateResource: UpdateResource = async (id, updatedResource) => {
     try{
-        const response = await axios.put(`${BASE_URL}/${id})`, updatedResource);
+        const response = await axios.put(`${BASE_URL}/${id}`, updatedResource);
         return response.data;
     } catch (error) {
         console.error('Error updating resource: ', error)
