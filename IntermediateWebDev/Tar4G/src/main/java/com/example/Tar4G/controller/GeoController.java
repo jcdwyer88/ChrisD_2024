@@ -3,6 +3,9 @@ package com.example.Tar4G.controller;
 import com.example.Tar4G.entity.GeoResource;
 import com.example.Tar4G.service.GeoService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +36,17 @@ public class GeoController {
     public ResponseEntity<GeoResource> getGeoResourceById(@PathVariable Long id) {
         GeoResource resource = geoService.getResourceById(id);
         return ResponseEntity.ok(resource);
+    }
+
+    @GetMapping("/search")
+    public Page<GeoResource> getAllResourcesByNameOrDescription(
+            @RequestParam(value = "name", required = false, defaultValue = "") String name,
+            @RequestParam(value = "description", required = false, defaultValue = "") String description,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return geoService.getAllResourcesByNameOrDescription(name, description, pageable);
     }
 
     @DeleteMapping("{id}")

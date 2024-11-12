@@ -20,5 +20,4 @@ public class GeoResource {
     private String name;
     private String description;
     private String url;
-    private String keywords;
 }

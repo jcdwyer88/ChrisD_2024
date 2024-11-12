@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import '../App.css'
 
 export const Header = () => {
+
     return (
         <Box sx={{margin: 1, display: 'flex', justifyContent: 'center'}}>
             <Paper style={{ backgroundColor: 'transparent', width: '100vw', alignContent: 'center' }}>
@@ -11,7 +12,7 @@ export const Header = () => {
                         elevation={10}
                         sx={{ backgroundColor: 'palegoldenrod', opacity: '70%', borderRadius: 2}}>
                     <Toolbar variant="dense">
-                        <Typography variant="h6" sx={{flexGrow: 1, fontStyle: 'italic', color: 'black'}}> Tools and Resources for the Geospatial Community </Typography>
+                        <Typography variant="h6" sx={{flexGrow: 1, fontStyle: 'italic', color: 'black'}}> TaR4G </Typography>
                         <Box sx={{display: 'flex'}}>
                             <Button component={NavLink} to="/" sx={{
                                 fontWeight: 700,

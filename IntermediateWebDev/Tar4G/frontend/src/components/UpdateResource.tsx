@@ -1,15 +1,16 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getResourceById, updateResource} from "../helpers/Client.ts"
-import {Box, Button, Container, Snackbar, TextField, Typography} from "@mui/material";
+import {Box, Button, CircularProgress, Container, Snackbar, TextField, Typography} from "@mui/material";
+import {Resource} from "../helpers/types.ts";
 
 export const UpdateResource = () => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('');
-    const [keywords, setKeywords] = useState('');
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -18,14 +19,25 @@ export const UpdateResource = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        const newResource = {name, description, url, keywords};
+        if (!name || !description || !url) {
+            setErrorMessage('All fields are required.');
+            return;
+        }
+
+        const newResource: Resource = {name, description, url};
+
         try {
-            await updateResource(ID, newResource);
-            console.log('Resource update: ', newResource);
+            setLoading(true);
+            const result = await updateResource(ID, newResource);
+            console.log('Resource updated: ', result);
+            window.alert(`Successfully updated: \n\n=> ${newResource.name}`)
+
             navigate("/resources");
-        } catch (error) {
-            setErrorMessage("Error saving resource. Please try again.");
+        } catch (error: any) {
+            setErrorMessage(error.message || "Error saving resource. Please try again.");
             console.error('Error saving resource: ', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -33,36 +45,38 @@ export const UpdateResource = () => {
         const fetchResource = async () => {
             if (ID) {
                 try {
+                    setLoading(true);
                     const response = await getResourceById(ID);
-                    console.log(response)
                     setName(response.name)
                     setDescription(response.description)
                     setUrl(response.url)
-                    setKeywords(response.keywords)
                     console.log({response})
                 } catch (error) {
                     setErrorMessage("Error fetching resource");
                     console.error('Error fetching resource: ', error)
+                } finally {
+                    setLoading(false);
                 }
             }
         };
         fetchResource();
-    }, [id, ID]);
+    }, [ID]);
 
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>Modify Resource</Typography>
+            <Typography variant="h4" sx={{textAlign: 'center', textShadow: '2px 2px goldenrod', fontStyle: 'italic', fontWeight: 700, color: 'black', mt: 5}}> Modify Resource </Typography>
+
 
             {errorMessage && (
                 <Snackbar
                     open={true}
                     message={errorMessage}
                     autoHideDuration={6000}
-                    onClose={() => setErrorMessage(null)}
+                    onClose={() => setErrorMessage('')}
                 />
             )}
 
-            <Box className='form' onSubmit={handleSubmit}
+            <Box component='form' onSubmit={handleSubmit}
                  sx={{display: 'flex', flexDirection: 'column', gap: 2, padding: 2, borderRadius: 2}}>
                 <Box className='form'
                      sx={{
@@ -80,7 +94,7 @@ export const UpdateResource = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required>
-
+                        multiline
                     </TextField>
                     <TextField
                         label="Resource Description"
@@ -88,6 +102,7 @@ export const UpdateResource = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        multiline
                     />
                     <TextField
                         label="Resource URL"
@@ -96,16 +111,14 @@ export const UpdateResource = () => {
                         onChange={(e) => setUrl(e.target.value)}
                         required
                     />
-                    <TextField
-                        label="Resource Keywords"
-                        placeholder="What are some keywords for this resource..."
-                        value={keywords}
-                        onChange={(e) => setKeywords(e.target.value)}
-                        required
-                    />
-
-                    <Button type="submit" variant="contained" color="primary" sx={{mt: 2}}>
-                        Submit</Button>
+                </Box>
+                <Box sx={{display: 'flex'}}>
+                    <Button type="submit" variant="contained" color="success" sx={{display: 'flex', flexGrow: 1, margin: 1, outlineColor: 'black'}}>
+                        {loading ? <CircularProgress size={24}/> : 'Submit'}
+                    </Button>
+                    <Button type="button" variant="contained" color="error" onClick={() => navigate('/resources')} sx={{display: 'flex', flexGrow: 1, margin: 1, outlineColor: 'black'}}>
+                        {loading ? <CircularProgress size={24}/> : 'Cancel'}
+                    </Button>
                 </Box>
             </Box>
         </Container>

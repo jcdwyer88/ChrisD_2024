@@ -4,6 +4,5 @@ CREATE TABLE geo_resource
     name        VARCHAR(255),
     description VARCHAR(255),
     url         VARCHAR(255),
-    keywords    VARCHAR(255),
     CONSTRAINT pk_geo_resource PRIMARY KEY (id)
 );
