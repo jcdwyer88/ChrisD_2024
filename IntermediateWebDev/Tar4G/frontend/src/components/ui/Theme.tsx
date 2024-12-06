@@ -6,7 +6,6 @@ export const useStyles = makeStyles({
     root: {
         backgroundColor: 'transparent',
         color: 'black',
-        height: '80vh',
         width: '97vw',
         pt: 2,
         '& .header': {
@@ -19,7 +18,7 @@ export const useStyles = makeStyles({
 export const Search = styled('div')(({theme}) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.black, 0.15),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
@@ -27,6 +26,7 @@ export const Search = styled('div')(({theme}) => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
+        marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
         width: 'auto',
     },
@@ -40,11 +40,11 @@ export const SearchIconWrapper = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'inherit',
+    color: 'black',
 }));
 
 export const StyledInputBase = styled(InputBase)(({theme}) => ({
-    color: 'inherit',
+    color: 'black',
     width: '100%',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),

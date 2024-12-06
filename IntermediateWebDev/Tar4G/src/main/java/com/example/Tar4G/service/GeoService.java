@@ -40,13 +40,7 @@ public class GeoService {
     }
 
     public Page<GeoResource> getAllResourcesByNameOrDescription(String name, String description, Pageable pageable) {
-//        if (description == null || description.trim().isEmpty()) {
-//            throw new IllegalArgumentException("description is null or empty");
-//        }
-//        return geoRepository.findByNameContainingOrDescriptionContaining(name, description, pageable);
         return geoRepository.findByNameContainingOrDescriptionContaining(name, description, pageable);
-
-
     }
 
 }

@@ -30,17 +30,33 @@ export const List = () => {
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
 
     return (
-        <Box sx={{ display: 'flex', width: '90vw', margin: 'auto', justifyContent: 'center' }}>
+        <Box id='resourceTable' sx={{ display: 'flex', width: '90vw', margin: 'auto', justifyContent: 'center' }}>
             <Paper elevation={12} className={classes.root} style={{ borderRadius: 2 }}>
-                <Search sx={{ display: 'inline-flex', flexGrow: 1 }}>
-                        <SearchIconWrapper><SearchIcon /></SearchIconWrapper>
-                    <StyledInputBase
-                        value={search}
-                        onChange={handleSearchChange}
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                </Search>
+                <Box sx={{display: 'flex'}}>
+                    <Search sx={{ flexGrow: 1, mr: 2 }}>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            value={search}
+                            onChange={handleSearchChange}
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </Search>
+                    <Button variant='contained' component={NavLink} to="/add-resource" sx={{
+                        flexGrow: 0,
+                        backgroundColor: 'palegoldenrod',
+                        fontWeight: 700,
+                        color: 'black',
+                        '&:hover': {
+                            fontStyle: 'italic',
+                            color: 'darkgoldenrod',
+                            transform: 'scale(1.05)',
+                            transition: 'transform 0.5s ease',
+                        }
+                    }}> Add Resource </Button>
+                </Box>
                 {loading ? (
                     <CircularProgress />
                 ) : err ? (
@@ -63,19 +79,6 @@ export const List = () => {
                         }}
                     />
                 )}
-                <Button variant='contained' component={NavLink} to="/add-resource" sx={{
-                    flexGrow: 0,
-                    backgroundColor: 'palegoldenrod',
-                    fontWeight: 700,
-                    color: 'black',
-                    marginTop: 2,
-                    '&:hover': {
-                        fontStyle: 'italic',
-                        color: 'darkgoldenrod',
-                        transform: 'scale(1.05)',
-                        transition: 'transform 0.5s ease',
-                    }
-                }}> Add Resource </Button>
             </Paper>
         </Box>
     );

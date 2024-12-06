@@ -43,6 +43,19 @@ export const getColumnDefinitions = (
         )
     },
     {
+        field: 'notes', headerName: 'Notes', headerClassName: 'header', flex: 3, minWidth: 180,
+        renderCell: (params) => (
+            <a
+                href={params.value}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ wordBreak: 'break-word', textDecoration: 'none', color: 'white' }}
+            >
+                {params.value}
+            </a>
+        )
+    },
+    {
         field: 'actions', headerName: '', headerClassName: 'header', flex: 1,
         renderCell: (params) => (
             <Box sx={{ display: 'flex', height: '100%', justifyContent: 'center' }}>
@@ -66,13 +79,19 @@ export const listResources = async (
 ) => {
     setLoading(true);
     setError('');
+
     try {
         const data = await fetchResources(search);
-
         setResources(data);
     } catch (error) {
-        setError("Failed to load resources.");
-        console.error(error);
+        if (error instanceof Error) {
+            setError(`Failed to load resources: ${error.message}`);
+        } else {
+            setError('An unexpected error occurred.');
+        }
+        console.error("Error loading resources:", error);
+        // setError("Failed to load resources.");
+        // console.error(error);
     } finally {
         setLoading(false);
     }
